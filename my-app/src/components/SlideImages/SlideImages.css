@@ -1,0 +1,41 @@
+
+
+.SlideImage .descricao{
+    width: 60%;
+    margin-top: 15px;
+}
+
+.media-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.media-content {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.slide-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+
+
+@media (max-width: 900px) {
+    .SlideImage .descricao{
+        width: 90%;
+        margin-top: 15px;
+    }
+
+    .SlideImage .titulo {
+        font-size: 14px;
+    }
+  }

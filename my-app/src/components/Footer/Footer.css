@@ -1,0 +1,43 @@
+.Footer{
+
+    background-color: rgb(240, 240, 240);
+    height: 125px;
+}
+
+
+
+.follow-us{
+
+    display: flex;
+    align-items: center;
+    height: 125px;
+    justify-content: left;
+    margin-left: 10%;
+}
+
+.follow-us h5{
+    font-size: 15px;
+}
+
+
+.follow-us img{
+    width: 35px;
+    margin-top: 20px;
+}
+
+
+.Footer ul {
+    margin-top: 0;
+    margin-right: 20px;
+    list-style-type: none;
+    float: right;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    
+}
+
+.Footer li {
+    float:left;
+    padding-right: 1rem;
+}

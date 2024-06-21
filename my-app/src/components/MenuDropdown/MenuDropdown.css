@@ -1,0 +1,59 @@
+.custom-dropdown-toggle {
+    background-color: transparent !important;
+    color: black !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important; 
+    height: 100%;
+}
+
+.custom-dropdown-toggle::after {
+    display: none !important; /* Esconder a seta */
+}
+
+.custom-dropdown-toggle:hover {
+    color: gray !important;
+    background-color: transparent !important;
+}
+
+.dropdown.show .custom-dropdown-toggle {
+    color: gray !important;
+    background-color: transparent !important;
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    left: 0 !important;
+    z-index: 1000 !important; 
+    top: 0 !important; 
+    max-height: 0;
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden; /* Adicionado para controle de visibilidade inicial */
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Ajustar a transição */
+}
+
+.dropdown.show .dropdown-menu {
+    max-height: 300px;
+    opacity: 1;
+    visibility: visible; /* Tornar visível quando dropdown é mostrado */
+}
+
+.dropdown .dropdown-menu {
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Ajustar a transição */
+
+    max-height: 0;
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden; /* Controle de visibilidade inicial */
+}
+
+.dropdown.show .dropdown-menu { 
+    max-height: 300px;
+    opacity: 1;
+    visibility: visible; /* Tornar visível quando dropdown é mostrado */
+}

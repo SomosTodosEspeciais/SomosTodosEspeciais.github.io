@@ -1,0 +1,107 @@
+.HomePage {
+    display: flex;
+    width: 100%;
+}
+
+.HomePage  .lateral-left,
+.HomePage  .lateral-right {
+    background-color: #ffff99;
+    width: 10%; 
+    height: auto;
+}
+
+.HomePage  .content {
+    margin: 50px auto;
+    width: 70%; 
+
+}
+
+
+.HomePage h1 {
+    font-size: 2.125rem;
+    margin-bottom: 20px;
+}
+
+.HomePage h2 {
+    font-size: 24px;
+}
+
+.HomePage h3 {
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.HomePage p, .HomePage ul {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.HomePage ul {
+    margin-left: 20px;
+}
+
+.HomePage ul ul {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.HomePage li {
+    margin-bottom: 10px;
+}
+
+.HomePage li:last-child {
+    margin-bottom: 0;
+}
+
+
+
+.HomePage p:last-child {
+    margin-bottom: 0;
+}
+
+.HomePage .origens,
+.HomePage .missao{
+    border: 2px solid black;
+    border-radius: 25px;
+    padding-bottom: 20px;
+}
+
+.HomePage .origens h2,
+.HomePage .missao h2{
+    border-bottom: 2px solid black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+@media (max-width: 900px) {
+    .HomePage h1 {
+        font-size: 26px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    .HomePage h2 {
+        font-size: 22px;
+        margin-top: 40px;
+        margin-bottom: 5px;
+    }
+    
+    .HomePage h3 {
+        font-size: 18px;
+        margin-top: 30px;
+        margin-bottom: 5px;
+    }
+    
+    .HomePage p, .HomePage ul {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+    .HomePage  .content {
+        margin: 10px auto;
+        width: 70%; 
+    }
+  }

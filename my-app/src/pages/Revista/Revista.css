@@ -1,0 +1,38 @@
+.Revista {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
+}
+
+.Revista .header {
+    text-align: center;
+    font-size: 25px;
+    background-color: #ffff99;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.Revista .pdf-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Revista .pdf-page {
+    margin: 0;
+    width: 100%; 
+
+}
+
+.Revista .react-pdf__Page__canvas {
+    margin: 0 !important; 
+    width: 100% !important;
+}
+
+.Revista .react-pdf__Page__textContent,
+.Revista .react-pdf__Page__annotations {
+    display: none;
+}

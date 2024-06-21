@@ -1,0 +1,8 @@
+/* src/components/Flower.css */
+.flower {
+    position: absolute;
+    width: 50px; /* Ajuste conforme necessário */
+    height: 50px; /* Ajuste conforme necessário */
+    pointer-events: none; /* Opcional: garante que as flores não interfiram com outros elementos */
+  }
+  
