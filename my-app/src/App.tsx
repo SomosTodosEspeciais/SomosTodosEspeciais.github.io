@@ -15,7 +15,7 @@ import Extras from './pages/Extras/Extras';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="/somostodosespeciais.github.io">
         <Navbar />
         <div className="content">
           <Routes>
