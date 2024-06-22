@@ -221,7 +221,7 @@ const HomePage = () => {
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2} justifyContent="center">
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#c92a40',border: "1px groove black" }}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#FCFCD5',border: "1px groove black" }}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Inclusão
                   </Typography>
@@ -231,7 +231,7 @@ const HomePage = () => {
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#08974B' ,border: "1px groove black"}}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#e2b126' ,border: "1px groove black"}}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Empatia
                   </Typography>
@@ -241,7 +241,7 @@ const HomePage = () => {
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: 'rgba(28,133,181,255)' ,border: "1px groove black"}}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#FCFCD5' ,border: "1px groove black"}}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Criatividade
                   </Typography>
@@ -261,7 +261,7 @@ const HomePage = () => {
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#b787b7',border: "1px groove black" }}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#FCFCD5',border: "1px groove black" }}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Compromisso
                   </Typography>
