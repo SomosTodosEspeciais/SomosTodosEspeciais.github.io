@@ -39,7 +39,7 @@ const HomePage = () => {
 
   const isSmallScreen = useMediaQuery('(max-width: 900px)');
   const [flowers, setFlowers] = useState<FlowerPosition[]>([]);
-  
+
   useEffect(() => {
     const calculateFlowerPositions = () => {
       const homePageElement = document.querySelector('.HomePage') as HTMLElement | null;
@@ -70,7 +70,35 @@ const HomePage = () => {
         { src: flower3, top: `${offsetHeight * 0.98}px`, left: `${offsetWidth * 0.03}px` },
       ];
 
-      setFlowers(calculatedFlowers);
+      const calculatedFlowers_phone = [
+        // Flower 1
+        { src: flower1, top: `${offsetHeight * 0.02}px`, left: `-${offsetWidth * 0.020}px` },
+        { src: flower1, top: `${offsetHeight * 0.2}px`, left: `-${offsetWidth * 0.03}px` },
+        { src: flower1, top: `${offsetHeight * 0.5}px`, left: `${offsetWidth * 0.9}px` },
+        { src: flower1, top: `${offsetHeight * 0.7}px`, left: `${offsetWidth * 0.90}px` },
+        { src: flower1, top: `${offsetHeight * 0.95}px`, left: `-${offsetWidth * 0.05}px` },
+
+        // Flower 2
+        { src: flower2, top: `${offsetHeight * 0.15}px`, left: `-${offsetWidth * 0.02}px` },
+        { src: flower2, top: `${offsetHeight * 0.4}px`, left: `${offsetWidth * 0.9}px` },
+        { src: flower2, top: `${offsetHeight * 0.6}px`, left: `-${offsetWidth * 0.05}px` },
+        { src: flower2, top: `${offsetHeight * 0.8}px`, left: `${offsetWidth * 0.90}px` },
+        { src: flower2, top: `${offsetHeight * 0.99}px`, left: `${offsetWidth * 0.90}px` },
+
+        // Flower 3
+        { src: flower3, top: `${offsetHeight * 0.25}px`, left: `${offsetWidth * 0.90}px` },
+        { src: flower3, top: `${offsetHeight * 0.55}px`, left: `${offsetWidth * 0.92}px` },
+        { src: flower3, top: `${offsetHeight * 0.75}px`, left: `-${offsetWidth * 0.028}px` },
+        { src: flower3, top: `${offsetHeight * 0.85}px`, left: `${offsetWidth * 0.93}px` },
+        { src: flower3, top: `${offsetHeight * 0.98}px`, left: `-${offsetWidth * 0.03}px` },
+      ];
+      if (isSmallScreen) {
+        setFlowers(calculatedFlowers_phone);
+      }
+      else {
+        setFlowers(calculatedFlowers);
+      }
+
     };
 
     calculateFlowerPositions();
@@ -94,16 +122,11 @@ const HomePage = () => {
           </div>
           <p>No coração do distrito de Braga, um grupo diversificado de jovens apaixonados, provenientes de diferentes áreas de formação, uniu-se em prol de uma causa comum: a promoção da inclusão e a transformação de realidades. Movidos por uma visão compartilhada de um mundo mais justo e igualitário, esses jovens visionários deram vida a uma iniciativa sem precedentes: um grupo promotor de entreajuda e mudança, que tece uma aliança única entre Ação Comunitária e Solidariedade.</p>
 
-          <div style={{ display: "flex", flexDirection: isSmallScreen ? "column" : "row", gap: "10px", textAlign: "center", marginBottom: "10px" }}>
-            <div className={isSmallScreen ? "" : 'origens'}>
-              <h2>Origens e Inspiração</h2>
-              <p>No dia 4 de Julho de 2023, marcou-se o nascimento desta iniciativa revolucionária com a realização da revista inaugural "Todos Somos Especiais - Perspetivas da Inclusão em Contexto Escolar". Este evento emblemático não apenas sinalizou o início de uma jornada significativa, mas também estabeleceu os alicerces para uma missão extraordinária que transcende os limites convencionais da atuação social.</p>
+          <div style={{ display: "flex", textAlign: "center", marginBottom: "10px", alignItems: "center" }}>
 
-            </div>
             <div className={isSmallScreen ? "" : 'missao'}>
               <h2>Missão: Rumo a um Mundo Mais Inclusivo</h2>
               <p>A nossa missão é clara e urgente: trabalhar incansavelmente para promover a inclusão em todas as suas formas, desafiando estereótipos, quebrando barreiras e construindo pontes de compreensão e empatia. Através da sinergia entre Ação Comunitária e Solidariedade, aspiramos não apenas a sensibilizar, mas também a inspirar ação concreta em direção a uma sociedade mais justa e acolhedora para todos.</p>
-
             </div>
 
           </div>
@@ -130,7 +153,7 @@ const HomePage = () => {
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={2} justifyContent="center">
                 <Grid item>
-                  <StyledPaper sx={{ my: 1, p: 2, height: 250,backgroundColor: '#c92a40', }}>
+                  <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#c92a40', }}>
                     <Typography variant="h1" gutterBottom fontWeight={700}>
                       Inclusão
                     </Typography>
@@ -140,7 +163,7 @@ const HomePage = () => {
                   </StyledPaper>
                 </Grid>
                 <Grid item>
-                  <StyledPaper sx={{ my: 1, p: 2, height: 250,backgroundColor: '#ffff99', }}>
+                  <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#ffff99', }}>
                     <Typography variant="h1" gutterBottom fontWeight={700}>
                       Empatia
                     </Typography>
@@ -150,7 +173,7 @@ const HomePage = () => {
                   </StyledPaper>
                 </Grid>
                 <Grid item>
-                  <StyledPaper sx={{ my: 1, p: 2, height: 250 ,backgroundColor: 'rgba(28,133,181,255)',}}>
+                  <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: 'rgba(28,133,181,255)', }}>
                     <Typography variant="h1" gutterBottom fontWeight={700}>
                       Criatividade                    </Typography>
                     <Typography>
@@ -159,7 +182,7 @@ const HomePage = () => {
                   </StyledPaper>
                 </Grid>
                 <Grid item>
-                  <StyledPaper sx={{ my: 1, p: 2, height: 250,backgroundColor: '#e2b126', }}>
+                  <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#e2b126', }}>
                     <Typography variant="h1" gutterBottom fontWeight={700}>
                       Colaboração
                     </Typography>
@@ -169,7 +192,7 @@ const HomePage = () => {
                   </StyledPaper>
                 </Grid>
                 <Grid item>
-                  <StyledPaper sx={{ my: 1, p: 2, height: 250,backgroundColor: '#b787b7', }}>
+                  <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#b787b7', }}>
                     <Typography variant="h1" gutterBottom fontWeight={700}>
                       Compromisso
                     </Typography>

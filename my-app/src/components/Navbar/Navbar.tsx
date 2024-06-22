@@ -50,6 +50,12 @@ const Navbar = () => {
         link: '/extras'
     }
 
+    const Item9: Item = {
+        nome: 'História',
+        link: '/historia'
+    }
+
+
     const isSmallScreen = useMediaQuery('(max-width: 900px)');
 
     return (
@@ -62,7 +68,7 @@ const Navbar = () => {
                         <>
                             <ul>
                                 <li><Link className='button-nav-icon' to={'/'} ><img src={icon} alt="" /></Link></li>
-                                <li><MenuDropdown itens={[Item4,Item1, Item2, Item3,Item5,Item6,Item7,Item8]} titulo={""} icon={MenuIcon} ></MenuDropdown></li>
+                                <li><MenuDropdown itens={[Item4, Item5,Item9, Item1, Item3, Item2, Item7, Item8, Item6]} titulo={""} icon={MenuIcon} ></MenuDropdown></li>
                             </ul>
                         </>
 
@@ -71,11 +77,12 @@ const Navbar = () => {
                             <ul>
                                 <li><Link className='button-nav-icon' to={'/'} ><img src={icon} alt="" /></Link></li>
                                 <li><Link className='button-nav-icon' to={'/'} > Página Inicial</Link></li>
-                                <li><MenuDropdown itens={[Item1, Item2, Item3]}  titulo={'Dinâmica'} ></MenuDropdown></li>
                                 <li><Link className='button-nav-icon' to={'/constituicao'} > Constituição</Link></li>
-                                <li><Link className='button-nav-icon' to={'/contacto'} > Contacto</Link></li>
+                                <li><Link className='button-nav-icon' to={'/historia'} > História </Link></li>
+                                <li><MenuDropdown itens={[Item1, Item2, Item3]} titulo={'Dinâmica'} ></MenuDropdown></li>
                                 <li><Link className='button-nav-icon' to={'/mascote'} > Mascote </Link></li>
                                 <li><Link className='button-nav-icon' to={'/extras'} > Extras </Link></li>
+                                <li><Link className='button-nav-icon' to={'/contacto'} > Contacto</Link></li>
                             </ul>
 
                         </>

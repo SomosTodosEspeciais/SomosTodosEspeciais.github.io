@@ -14,7 +14,7 @@ const Mascote = () => {
         <div className="Mascote">
             <div className='header'>
                 <div className='flower-container' style={{  left: isSmallScreen ? "0px" : "90px" }}>
-                    <img src={Flower} alt="Flower"  style={{  height: isSmallScreen ? "100px" : "130px" }} />
+                    <img src={Flower} alt="Flower"  style={{  height: isSmallScreen ? "100px" : "200px" }} />
                 </div>
                 <h1>Puzzleflor</h1>
             </div>

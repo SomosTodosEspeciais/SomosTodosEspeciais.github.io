@@ -61,20 +61,36 @@
     margin-bottom: 0;
 }
 
-.HomePage .origens,
-.HomePage .missao{
-    border: 2px solid black;
+
+.HomePage .missao {
+    border: 3px solid black;
     border-radius: 25px;
     padding-bottom: 20px;
+    width: 50%;
+    margin: 0 auto; /* Adicione esta linha para centralizar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #ffff99;
 }
 
-.HomePage .origens h2,
+
 .HomePage .missao h2{
     border-bottom: 2px solid black;
     padding-top: 10px;
     padding-bottom: 10px;
+    width: 100%;
+    background-color: #c92a40;
+    border-radius: 20px 20px 0px 0px;
 }
 
+.HomePage .missao p{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 90%;
+    
+}
 
 @media (max-width: 900px) {
     .HomePage h1 {

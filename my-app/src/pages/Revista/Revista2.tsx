@@ -27,6 +27,9 @@ const Revista2 = () => {
             <div className='header'>
                 <h1>Perspetivas da Inclusão em Contexto Escolar</h1>
             </div>
+            <div style={{textAlign:"center",marginTop:"15px"}}>
+                <p>Clica na revista e  explora este tema especial</p>
+            </div>
 
             <Document
                 file={pdf}

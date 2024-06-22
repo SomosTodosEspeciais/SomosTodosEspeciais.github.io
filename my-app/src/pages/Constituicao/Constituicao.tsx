@@ -4,8 +4,12 @@ import 'aos/dist/aos.css';
 import Profile from '../../assets/Generic-Profile.jpg';
 import './Constituicao.css';
 import { useMediaQuery } from '@mui/material';
-
-
+import Ligia from '../../assets/equipa-ligia.jpg'
+import Marcia from '../../assets/equipa-marcia.jpg'
+import Andre from '../../assets/equipa-andre.jpg'
+import Sandra from '../../assets/equipa-sandra.jpeg'
+import Paulo from '../../assets/equipa-paulo.jpeg'
+import Grupo from '../../assets/gatos-18.jpg'
 const Constituicao = () => {
     useEffect(() => {
         AOS.init({
@@ -13,15 +17,17 @@ const Constituicao = () => {
         });
     }, []);
 
+
+
     const serviceCategories = [
-        { name: 'Márcia Gonçalves', description: "Texto da Pessoa 1sssssssssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssssssssssss dsada", img: Profile },
-        { name: 'Lígia Mano', description: "Texto da Pessoa 2", img: Profile },
-        { name: 'Sandra Almeida', description: "Texto da Pessoa 3", img: Profile },
-        { name: 'Paulo Miranda', description: "Texto da Pessoa 4", img: Profile },
+        { name: 'Márcia Gonçalves', description: "Texto da Pessoa 1sssssssssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssssssssssss dsada", img: Marcia },
+        { name: 'Lígia Mano', description: "Texto da Pessoa 2", img: Ligia },
+        { name: 'Sandra Almeida', description: "Texto da Pessoa 3", img: Sandra },
+        { name: 'Paulo Miranda', description: "Texto da Pessoa 4", img: Paulo },
         { name: 'Joana Carvalho', description: "Texto da Pessoa 5", img: Profile },
         { name: 'Hernani Lopes', description: "Texto da Pessoa 6", img: Profile },
         { name: 'Cecília da Cruz', description: "Texto da Pessoa 7", img: Profile },
-        { name: 'André Ferreira', description: "Texto da Pessoa 8", img: Profile }
+        { name: 'André Ferreira', description: "Texto da Pessoa 8", img: Andre }
     ];
 
 
@@ -36,7 +42,7 @@ const Constituicao = () => {
                     <p >Algum Texto. Foto de grupo - Algum Texto. Foto de grupo -Algum Texto. Foto de grupo -Algum Texto. Foto de grupo -Algum Texto. Foto de grupo -Algum Texto. Foto de grupo -Algum Texto. Foto de grupo -Algum Texto. Foto de grupo -Algum Texto. Foto de grupo -Algum Texto. Foto de grupo -Algum Texto. Foto de grupo -</p>
                 </div>
                 <div className='right-column'>
-                    <img src={Profile} alt="" />
+                    <img src={Grupo} alt="" />
                 </div>
             </div>
             <div className='persones'>

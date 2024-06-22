@@ -36,3 +36,20 @@
 .Revista .react-pdf__Page__annotations {
     display: none;
 }
+
+
+.Revista p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+@media (max-width: 900px) {
+    .Revista p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+    
+ 
+  }
