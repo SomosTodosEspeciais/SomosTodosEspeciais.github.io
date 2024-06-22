@@ -110,7 +110,7 @@ const HomePage = () => {
       'Estimular o diálogo intercultural e a colaboração entre diferentes grupos e comunidades, visando à construção de sociedades mais coesas e solidárias.',
     ],
     cores:[
-      '#e2b126','#08974B','#b787b7','rgba(28,133,181,255)'
+      '#FCFCD5','#FCFCD5','#FCFCD5','FCFCD5'
       
     ]
   };
@@ -192,7 +192,7 @@ const HomePage = () => {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell style={{ backgroundColor: '#c92a40', border: "1px groove black" }}>
+                      <TableCell style={{ backgroundColor: '#9999CC', border: "1px groove black" }}>
                         <Typography variant="h1" gutterBottom fontWeight={700} >
                           Objetivos Específicos
                         </Typography>
