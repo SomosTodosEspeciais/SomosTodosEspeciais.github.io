@@ -10,6 +10,7 @@ import Andre from '../../assets/equipa-andre.jpg'
 import Sandra from '../../assets/equipa-sandra.jpeg'
 import Paulo from '../../assets/equipa-paulo.jpeg'
 import Cici from '../../assets/equipa-cici.jpeg'
+import Nani from '../../assets/equipa-nani.jpeg'
 import Grupo from '../../assets/gatos-18.jpg'
 const Constituicao = () => {
     useEffect(() => {
@@ -26,7 +27,7 @@ const Constituicao = () => {
         { name: 'Sandra Almeida', description: "Texto da Pessoa 3", img: Sandra },
         { name: 'Paulo Miranda', description: "Texto da Pessoa 4", img: Paulo },
         { name: 'Joana de Carvalho', description: "Texto da Pessoa 5", img: Profile },
-        { name: 'Hernani Lopes', description: "Texto da Pessoa 6", img: Profile },
+        { name: 'Hernani Lopes', description: "Texto da Pessoa 6", img: Nani },
         { name: 'Cecília da Cruz', description: "Texto da Pessoa 7", img: Cici },
         { name: 'André Ferreira', description: "Texto da Pessoa 8", img: Andre }
     ];

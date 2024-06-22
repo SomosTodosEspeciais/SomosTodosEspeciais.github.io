@@ -139,7 +139,7 @@ const HomePage = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell colSpan={2} style={{ backgroundColor: '#c92a40' , textAlign: 'center',border: '1px groove black' }}>
+                  <TableCell colSpan={2} style={{ backgroundColor: '#D7B8DA' , textAlign: 'center',border: '1px groove black' }}>
                     <Typography variant="h1" fontWeight={700} >
                       Rumo a um Mundo Mais Inclusivo
                     </Typography>
@@ -148,7 +148,7 @@ const HomePage = () => {
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <TableCell style={{ backgroundColor: '#ffff99', border: '1px groove black' }}>
+                  <TableCell style={{ backgroundColor: '#FCFCD5', border: '1px groove black' }}>
                     <Typography>
                       A nossa missão é clara e urgente: trabalhar incansavelmente para promover a inclusão em todas as suas formas, desafiando estereótipos, quebrando barreiras e construindo pontes de compreensão e empatia. Através da sinergia entre Ação Comunitária e Solidariedade, aspiramos não apenas a sensibilizar, mas também a inspirar ação concreta em direção a uma sociedade mais justa e acolhedora para todos.
                     </Typography>
@@ -170,14 +170,14 @@ const HomePage = () => {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell style={{ backgroundColor: '#c92a40', border: "1px groove black" }}>
+                      <TableCell style={{ backgroundColor: '#9999CC', border: "1px groove black" }}>
                         <Typography variant="h1" gutterBottom fontWeight={700}>
                           Objetivo Geral
                         </Typography>
                       </TableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody sx={{ backgroundColor: '#ffff99' }}>
+                  <TableBody sx={{ backgroundColor: '#FCFCD5' }}>
                     <TableRow>
                       <TableCell sx={{ border: "1px groove black" }}>
                         <Typography>{data.generalObjective} </Typography>
@@ -199,7 +199,7 @@ const HomePage = () => {
                       </TableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody sx={{ backgroundColor: '#ffff99' }}>
+                  <TableBody sx={{ backgroundColor: '#FCFCD5' }}>
                     {data.specificObjectives.map((objective, index) => (
                       <TableRow key={index}>
                         <TableCell sx={{ border: `1px groove black`,backgroundColor:data.cores[index] }}>
