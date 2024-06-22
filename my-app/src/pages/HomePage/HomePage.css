@@ -16,6 +16,9 @@
 
 }
 
+.HomePage .objetivos{
+    margin-bottom: 50px;
+}
 
 .HomePage h1 {
     font-size: 2.125rem;
@@ -63,8 +66,8 @@
 
 
 .HomePage .missao {
-    border: 3px solid black;
-    border-radius: 25px;
+    border: 1px groove black;
+    border-radius: 16px 16px 16px 16px;
     padding-bottom: 20px;
     width: 50%;
     margin: 0 auto; /* Adicione esta linha para centralizar */
@@ -77,12 +80,12 @@
 
 
 .HomePage .missao h2{
-    border-bottom: 2px solid black;
+    border-bottom: 1px groove #c92a40;
     padding-top: 10px;
     padding-bottom: 10px;
     width: 100%;
     background-color: #c92a40;
-    border-radius: 20px 20px 0px 0px;
+    border-radius: 15px 15px 0px 0px;
 }
 
 .HomePage .missao p{

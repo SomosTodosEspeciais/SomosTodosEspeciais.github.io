@@ -32,12 +32,20 @@
     margin-top: 20px;
 }
 
+.History .content img{
+    width: 500px;
+    margin: 50px;
+}
+
 
 @media (max-width: 900px) {
     .History p {
         font-size: 18px;
         line-height: 1.6;
         margin-bottom: 10px;
+    }
+    .History .content img{
+        width: 100%;
     }
     
  
