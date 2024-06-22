@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.1ac79d87.css",
-    "main.js": "/static/js/main.016882cb.js",
+    "main.css": "/static/css/main.d9bea0f0.css",
+    "main.js": "/static/js/main.d7dcabfd.js",
     "static/js/453.68693753.chunk.js": "/static/js/453.68693753.chunk.js",
     "static/media/extra-feira-0.mp4": "/static/media/extra-feira-0.289f7d96bbae34350e7b.mp4",
     "static/media/gatos-1.mp4": "/static/media/gatos-1.72480adc81b8af86274a.mp4",
@@ -43,6 +43,7 @@
     "static/media/gatos-8.jpeg": "/static/media/gatos-8.42299160991f1cd937a4.jpeg",
     "static/media/limpeza-1.jpg": "/static/media/limpeza-1.e66479e3b458777f1fdb.jpg",
     "static/media/equipa-sandra.jpeg": "/static/media/equipa-sandra.f7ccaeaf695bab558129.jpeg",
+    "static/media/equipa-cici.jpeg": "/static/media/equipa-cici.a1fb5f6b549484be9f3b.jpeg",
     "static/media/extra-revista-2.jpeg": "/static/media/extra-revista-2.1ab4343f5a0c34eb91ef.jpeg",
     "static/media/gatos-13.jpeg": "/static/media/gatos-13.75558a0d64578f8ed4a9.jpeg",
     "static/media/revista-10.jpg": "/static/media/revista-10.0829c0a24127b03d712c.jpg",
@@ -60,6 +61,7 @@
     "static/media/revista-23.jpg": "/static/media/revista-23.66749c9093349171f424.jpg",
     "static/media/revista-11.jpg": "/static/media/revista-11.82ee3245ac4f32527d0f.jpg",
     "static/media/revista-21.jpg": "/static/media/revista-21.e608f87c1b85a87ea3cb.jpg",
+    "static/media/bib-barcelos.jpg": "/static/media/bib-barcelos.1348650bf0f81ab0ef33.jpg",
     "static/media/revista-2.jpg": "/static/media/revista-2.f4567ddc869f8f745edf.jpg",
     "static/media/revista-18.jpg": "/static/media/revista-18.da630b0c0a43fabb1812.jpg",
     "static/media/revista-13.jpg": "/static/media/revista-13.362ca33af67f5da3b00c.jpg",
@@ -82,12 +84,12 @@
     "static/media/Generic-Profile.jpg": "/static/media/Generic-Profile.0485b1b3d9fdd7d2f959.jpg",
     "static/media/todos-icon.jpg": "/static/media/todos-icon.f5995624cf52aff3648f.jpg",
     "index.html": "/index.html",
-    "main.1ac79d87.css.map": "/static/css/main.1ac79d87.css.map",
-    "main.016882cb.js.map": "/static/js/main.016882cb.js.map",
+    "main.d9bea0f0.css.map": "/static/css/main.d9bea0f0.css.map",
+    "main.d7dcabfd.js.map": "/static/js/main.d7dcabfd.js.map",
     "453.68693753.chunk.js.map": "/static/js/453.68693753.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1ac79d87.css",
-    "static/js/main.016882cb.js"
+    "static/css/main.d9bea0f0.css",
+    "static/js/main.d7dcabfd.js"
   ]
 }
