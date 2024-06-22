@@ -109,7 +109,12 @@ const HomePage = () => {
       'Capacitar os jovens para se tornarem agentes de mudança, incentivando-os a usar suas habilidades e paixões para promover o bem comum.',
       'Estimular o diálogo intercultural e a colaboração entre diferentes grupos e comunidades, visando à construção de sociedades mais coesas e solidárias.',
     ],
+    cores:[
+      '#e2b126','#08974B','#b787b7','rgba(28,133,181,255)'
+      
+    ]
   };
+
 
   return (
     <div className="HomePage">
@@ -134,7 +139,7 @@ const HomePage = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell colSpan={2} style={{ backgroundColor: '#c92a40' , textAlign: 'center' }}>
+                  <TableCell colSpan={2} style={{ backgroundColor: '#c92a40' , textAlign: 'center',border: '1px groove black' }}>
                     <Typography variant="h1" fontWeight={700} >
                       Rumo a um Mundo Mais Inclusivo
                     </Typography>
@@ -143,7 +148,7 @@ const HomePage = () => {
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <TableCell style={{ backgroundColor: '#ffff99', border: '1px groove #e2b126' }}>
+                  <TableCell style={{ backgroundColor: '#ffff99', border: '1px groove black' }}>
                     <Typography>
                       A nossa missão é clara e urgente: trabalhar incansavelmente para promover a inclusão em todas as suas formas, desafiando estereótipos, quebrando barreiras e construindo pontes de compreensão e empatia. Através da sinergia entre Ação Comunitária e Solidariedade, aspiramos não apenas a sensibilizar, mas também a inspirar ação concreta em direção a uma sociedade mais justa e acolhedora para todos.
                     </Typography>
@@ -155,7 +160,7 @@ const HomePage = () => {
         </div>
         <div className='objetivos'>
           <div className="title" style={{ textAlign: "center" }}>
-            <h1>Objetivos e Valores</h1>
+            <h1>Objetivos</h1>
           </div>
 
 
@@ -165,7 +170,7 @@ const HomePage = () => {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell style={{ backgroundColor: 'rgba(28,133,181,255)', border: "1px groove rgba(28,133,181,255)" }}>
+                      <TableCell style={{ backgroundColor: '#c92a40', border: "1px groove black" }}>
                         <Typography variant="h1" gutterBottom fontWeight={700}>
                           Objetivo Geral
                         </Typography>
@@ -174,7 +179,7 @@ const HomePage = () => {
                   </TableHead>
                   <TableBody sx={{ backgroundColor: '#ffff99' }}>
                     <TableRow>
-                      <TableCell sx={{ border: "1px groove #e2b126" }}>
+                      <TableCell sx={{ border: "1px groove black" }}>
                         <Typography>{data.generalObjective} </Typography>
                       </TableCell>
                     </TableRow>
@@ -187,7 +192,7 @@ const HomePage = () => {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell style={{ backgroundColor: 'rgba(28,133,181,255)', border: "1px groove rgba(28,133,181,255)" }}>
+                      <TableCell style={{ backgroundColor: '#c92a40', border: "1px groove black" }}>
                         <Typography variant="h1" gutterBottom fontWeight={700} >
                           Objetivos Específicos
                         </Typography>
@@ -197,7 +202,7 @@ const HomePage = () => {
                   <TableBody sx={{ backgroundColor: '#ffff99' }}>
                     {data.specificObjectives.map((objective, index) => (
                       <TableRow key={index}>
-                        <TableCell sx={{ border: "1px groove #e2b126" }}>
+                        <TableCell sx={{ border: `1px groove black`,backgroundColor:data.cores[index] }}>
                           <Typography>{objective} </Typography>
                         </TableCell>
                       </TableRow>
@@ -210,13 +215,13 @@ const HomePage = () => {
         </div>
         <div className="valores">
           <div className="title" style={{ textAlign: "center" }}>
-            <h1>Os Nossos Valores</h1>
+            <h1>Valores</h1>
           </div>
 
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2} justifyContent="center">
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#c92a40' }}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#c92a40',border: "1px groove black" }}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Inclusão
                   </Typography>
@@ -226,7 +231,7 @@ const HomePage = () => {
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#ffff99' }}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#08974B' ,border: "1px groove black"}}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Empatia
                   </Typography>
@@ -236,7 +241,7 @@ const HomePage = () => {
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: 'rgba(28,133,181,255)' }}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: 'rgba(28,133,181,255)' ,border: "1px groove black"}}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Criatividade
                   </Typography>
@@ -246,7 +251,7 @@ const HomePage = () => {
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#e2b126' }}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#e2b126' ,border: "1px groove black"}}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Colaboração
                   </Typography>
@@ -256,7 +261,7 @@ const HomePage = () => {
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#b787b7' }}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#b787b7',border: "1px groove black" }}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Compromisso
                   </Typography>
