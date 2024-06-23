@@ -110,3 +110,93 @@
     top: 80%;
     left: 90%;
 }
+
+@media (max-width: 900px) {
+    .modal-escala-vigor h2{
+        margin: 0px;
+    }
+
+    .modal-escala-vigor .modal-overlay {
+        position: fixed;
+        top: 10%;
+        left: 2.5%;
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        background: none;
+    }
+    
+    .modal-escala-vigor .modal-content-aux {
+        width: 85%;
+        height: 90%;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        box-shadow: 0px 9px 46px 8px rgba(0, 0, 0, 0.12), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 11px 15px -7px rgba(0, 0, 0, 0.20);
+    }
+    
+    .modal-escala-vigor .modal-title {
+        height: 64px;
+        padding: 16px 24px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    
+    
+    .modal-escala-vigor .modal-title .modal-close {
+        cursor: pointer;
+        margin-right: 12px;
+        height: 34px;
+        width: 34px;
+    }
+    
+    .modal-escala-vigor .modal-content-aux .btn-container-notas {
+        height: 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .modal-escala-vigor .modal-content-aux .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0px;
+        margin-bottom: 30px;
+    }
+    
+    .modal-escala-vigor .modal-text {
+        margin-left: 24px;
+        margin-right: 24px;
+        margin-bottom: 10px;
+        margin-top: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    
+    }
+    
+    .modal-escala-vigor .line {
+        border-bottom: 2px solid rgb(229, 233, 236);
+    }
+    
+    .modal-escala-vigor .modal-text-duplicar {
+        border-top: 1px solid rgb(222, 222, 222);
+        border-bottom: 1px solid rgb(222, 222, 222);
+        height: 122px;
+    }
+    
+    .modal-escala-vigor .modal-text img {
+        height: 200px;
+        justify-content: right;
+        margin-right: 0px;
+    }
+
+}

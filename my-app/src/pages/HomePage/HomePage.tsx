@@ -300,11 +300,11 @@ const HomePage = () => {
           showButtons={false}
           height={'auto'}
         >
-          <div style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
+          <div style={{ width: "100%", display: "flex", justifyContent:"space-between", flexDirection: isSmallScreen ? "column" : "row" }}>
             <Typography
               variant='body1'
               lineHeight={"24px"}
-              width={"60%"}
+              width={isSmallScreen ? "100%" : "60%"}
             >
               Um dia especial é feito de eventos especiais. 🌻
               A equipa Todos Somos Especiais deseja-te um dia como tu, muito especial ♥️
