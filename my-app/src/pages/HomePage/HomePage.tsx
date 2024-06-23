@@ -12,6 +12,8 @@ import flower3 from '../../assets/flores-3.png';
 import Flower from '../../components/Flower/Flower';
 import { Key, useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import Modal from '../../components/Modal/Modal';
+import Marcia from "../../assets/equipa-marcia.jpg"
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -101,6 +103,18 @@ const HomePage = () => {
     calculateFlowerPositions();
   }, [isSmallScreen]);
 
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const openModal = (index: number) => {
+    setIsModalOpen(true);
+
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+
+  };
+
+
   const data = {
     generalObjective: 'Fomentar uma cultura de inclusão e diversidade em todos os âmbitos da sociedade, com ênfase especial na ação comunitária e na solidariedade como ferramentas de transformação social.',
     specificObjectives: [
@@ -109,9 +123,9 @@ const HomePage = () => {
       'Capacitar os jovens para se tornarem agentes de mudança, incentivando-os a usar suas habilidades e paixões para promover o bem comum.',
       'Estimular o diálogo intercultural e a colaboração entre diferentes grupos e comunidades, visando à construção de sociedades mais coesas e solidárias.',
     ],
-    cores:[
-      '#FCFCD5','#FCFCD5','#FCFCD5','FCFCD5'
-      
+    cores: [
+      '#FCFCD5', '#FCFCD5', '#FCFCD5', 'FCFCD5'
+
     ]
   };
 
@@ -130,7 +144,7 @@ const HomePage = () => {
           Estamos comprometidos em desafiar o status quo, inspirar a esperança e fazer a diferença, um passo de cada vez, em direção a um futuro onde a inclusão não seja apenas uma ideia, mas sim uma realidade tangível para todos. Junte-se a nós nesta jornada emocionante de transformação e descubra como, juntos, podemos criar um mundo mais inclusivo, acolhedor e compassivo para todos os seres humanos. 🌻
         </p>
 
-        <div style={{marginBottom: "50px"}}>
+        <div style={{ marginBottom: "50px" }}>
           <div className="title" style={{ textAlign: "center" }}>
             <h1>Missão</h1>
           </div>
@@ -139,7 +153,7 @@ const HomePage = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell colSpan={2} style={{ backgroundColor: '#D7B8DA' , textAlign: 'center',border: '1px groove black' }}>
+                  <TableCell colSpan={2} style={{ backgroundColor: '#D7B8DA', textAlign: 'center', border: '1px groove black' }}>
                     <Typography variant="h1" fontWeight={700} >
                       Rumo a um Mundo Mais Inclusivo
                     </Typography>
@@ -202,7 +216,7 @@ const HomePage = () => {
                   <TableBody sx={{ backgroundColor: '#FCFCD5' }}>
                     {data.specificObjectives.map((objective, index) => (
                       <TableRow key={index}>
-                        <TableCell sx={{ border: `1px groove black`,backgroundColor:data.cores[index] }}>
+                        <TableCell sx={{ border: `1px groove black`, backgroundColor: data.cores[index] }}>
                           <Typography>{objective} </Typography>
                         </TableCell>
                       </TableRow>
@@ -221,7 +235,7 @@ const HomePage = () => {
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2} justifyContent="center">
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#A0E1A0',border: "1px groove black" }}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#A0E1A0', border: "1px groove black" }}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Inclusão
                   </Typography>
@@ -231,7 +245,7 @@ const HomePage = () => {
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#FCFCD5' ,border: "1px groove black"}}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#FCFCD5', border: "1px groove black" }}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Empatia
                   </Typography>
@@ -241,7 +255,7 @@ const HomePage = () => {
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#D7B8DA' ,border: "1px groove black"}}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#D7B8DA', border: "1px groove black" }}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Criatividade
                   </Typography>
@@ -251,7 +265,7 @@ const HomePage = () => {
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#e2b126' ,border: "1px groove black"}}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#e2b126', border: "1px groove black" }}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Colaboração
                   </Typography>
@@ -261,7 +275,7 @@ const HomePage = () => {
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#9999CC',border: "1px groove black" }}>
+                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#9999CC', border: "1px groove black" }}>
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Compromisso
                   </Typography>
@@ -275,6 +289,29 @@ const HomePage = () => {
         </div>
       </div>
       <div className="lateral-right"></div>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        titulo={"Parabéns Márcia"}
+        onSave={() => {
+          setIsModalOpen(false);
+        }}
+        showButtons={false}
+        height={'auto'}
+      >
+        <div style={{width:"100%",display:"flex",justifyContent:"space-between"}}>
+          <Typography
+            variant='body1'
+            lineHeight={"24px"}
+            width={"60%"}
+          >
+            Um dia especial é feito de eventos especiais. 🌻
+            A equipa Todos Somos Especiais deseja-te um dia como tu, muito especial ♥️
+
+          </Typography>
+          <img src={Marcia} />
+          </div>
+      </Modal>
     </div>
   );
 };
