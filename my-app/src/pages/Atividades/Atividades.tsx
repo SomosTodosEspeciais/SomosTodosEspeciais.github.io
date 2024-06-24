@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SlideImage from '../../components/SlideImages/SlideImages';
 import './Atividades.css';
 import { CarouselProvider } from "pure-react-carousel";
@@ -91,24 +91,7 @@ Teremos o maior gosto em contar com a vossa presença nas próximas edições! M
         }[];
         descricao: string;
     }[]>(atividades.slice(0, atividadesPorPagina));
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [imageSize, setImageSize] = useState(200);
 
-    const handleResize = () => {
-        setWindowWidth(window.innerWidth);
-        if (windowWidth < 400) {
-            setImageSize(20);
-        } else {
-            setImageSize(800);
-        }
-    };
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [windowWidth]);
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPageIndex(value);
@@ -127,6 +110,7 @@ Teremos o maior gosto em contar com a vossa presença nas próximas edições! M
                 {showAtividades.map(({ titulo, imagens, descricao }, index) => (
                     <div key={`${pageIndex}-${index}`}>
                         <CarouselProvider
+                            key={`${titulo}-${index}`}
                             visibleSlides={1}
                             totalSlides={imagens.length}
                             naturalSlideWidth={200}

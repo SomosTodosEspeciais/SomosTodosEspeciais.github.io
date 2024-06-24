@@ -5,7 +5,6 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { useMediaQuery } from '@mui/material';
-
 import flower1 from '../../assets/flores-1.png';
 import flower2 from '../../assets/flores-2.png';
 import flower3 from '../../assets/flores-3.png';
@@ -15,12 +14,6 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from
 import Modal from '../../components/Modal/Modal';
 import Marcia from "../../assets/equipa-marcia.jpg"
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -104,10 +97,6 @@ const HomePage = () => {
   }, [isSmallScreen]);
 
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const openModal = (index: number) => {
-    setIsModalOpen(true);
-
-  };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -357,7 +346,7 @@ const HomePage = () => {
               A equipa Todos Somos Especiais deseja-te um dia como tu, muito especial ♥️
 
             </Typography>
-            <img src={Marcia} />
+            <img src={Marcia} alt='' />
           </div>
         </Modal>
       )}

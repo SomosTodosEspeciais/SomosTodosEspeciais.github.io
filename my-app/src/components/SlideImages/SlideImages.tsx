@@ -1,36 +1,24 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import './SlideImages.css';
-import { Slider, Slide, ButtonBack, ButtonNext, CarouselContext } from "pure-react-carousel";
+import { Slider, Slide, ButtonBack, ButtonNext } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Typography, useMediaQuery } from '@mui/material';
-import { VideoPlayer, VideoPlayerProps } from "@graphland/react-video-player";
+import { VideoPlayer } from "@graphland/react-video-player";
 
-interface Slide {
+interface Slide2 {
     url: string;
 }
 
 interface SlideImagesProps {
-    images: Slide[];
+    images: Slide2[];
     titulo: string;
     descricao: string;
 }
 
 const SlideImages: React.FC<SlideImagesProps> = ({ images, titulo, descricao }) => {
-    const [slideIndex, setSlideIndex] = useState<number>(0);
-    const carouselContext = useContext(CarouselContext);
     const isSmallScreen = useMediaQuery('(max-width: 900px)');
-
-    useEffect(() => {
-        const onChange = () => {
-            const { currentSlide } = carouselContext.state;
-            setSlideIndex(currentSlide);
-        };
-
-        carouselContext.subscribe(onChange);
-        return () => carouselContext.unsubscribe(onChange);
-    }, [carouselContext]);
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [imageSize, setImageSize] = useState(500);

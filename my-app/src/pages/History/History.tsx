@@ -1,14 +1,7 @@
 import './History.css'
 import { useMediaQuery } from '@mui/material';
 import Biblioteca from '../../assets/bib-barcelos.jpg'
-
 import { Box, Typography } from '@mui/material';
-
-interface ImageWithCaptionProps {
-  src: string;
-  alt: string;
-  caption: string;
-}
 
 const History = () => {
 

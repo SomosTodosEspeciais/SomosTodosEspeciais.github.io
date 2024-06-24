@@ -64,7 +64,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, titulo, onSave, height, 
                         <Typography variant='h2' sx={{ marginTop: "5px" }}>
                             {titulo}
                         </Typography>
-                        <img src={Close} className="modal-close" onClick={onClose} />
+                        <img src={Close} alt='' className="modal-close" onClick={onClose} />
                     </div>
                     <div className='modal-text'>
                         {children}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { Document, Page } from 'react-pdf';
 import HTMLFlipBook from 'react-pageflip';
 import './Revista2.css';
@@ -7,7 +7,6 @@ import pdf from './revista.pdf';
 
 const Revista2 = () => {
     const [numPages, setNumPages] = useState<number>();
-    const flipBookContainerRef = useRef<HTMLDivElement>(null);
 
     function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
         setNumPages(numPages);

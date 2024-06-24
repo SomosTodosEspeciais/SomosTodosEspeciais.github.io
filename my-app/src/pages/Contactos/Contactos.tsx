@@ -39,7 +39,7 @@ const Contactos = () => {
 
     // Função para validar o nome (por exemplo)
     const validateName = (value: string) => {
-        if (value.trim().length == 0) {
+        if (value.trim().length === 0) {
             setErrorText('É Obrigatório Preencher o Nome');
             setError(true);
         } else {
@@ -65,7 +65,7 @@ const Contactos = () => {
         }
     };
     const validateMessage = (value: string) => {
-        if (value.trim().length == 0) {
+        if (value.trim().length === 0) {
             setErrorTextMessage('É Obrigatório Preencher a Mensagem');
             setErrorMessage(true);
         } else {
@@ -77,13 +77,13 @@ const Contactos = () => {
 
     const actionSave = (snackbarId: SnackbarKey | undefined) => (
         <>
-            <img src={Close} className='close-image' onClick={() => { closeSnackbar(snackbarId) }}></img>
+            <img src={Close} alt='' className='close-image' onClick={() => { closeSnackbar(snackbarId) }}></img>
         </>
     );
 
     const actionErrorInfo = (snackbarId: SnackbarKey | undefined) => (
         <>
-            <img src={Close} className='close-image' onClick={() => { closeSnackbar(snackbarId) }}></img>
+            <img src={Close} alt='' className='close-image' onClick={() => { closeSnackbar(snackbarId) }}></img>
         </>
     );
 
@@ -248,7 +248,7 @@ const Contactos = () => {
                         <div className='mail'>
                             <Box sx={{ maxWidth: 500, mt: 0, paddingY: isSmallScreen ? '15px' : '0pc' }}>
                                 <div style={{ textAlign: isSmallScreen ? 'center' : 'left', marginTop: "0px" }}>
-                                    <Typography variant="h4" sx={{ fontWeight: 'bold', fontSize: isSmallScreen ? '26px' : '2.125rem' }} gutterBottom>Entre em Contato Conosco</Typography>
+                                    <Typography variant="h4" sx={{ fontWeight: 'bold', fontSize: isSmallScreen ? '26px' : '2.125rem' }} gutterBottom>Entre em Contacto Conosco</Typography>
                                 </div>
                                 <Typography variant="h6" sx={{ fontSize: isSmallScreen ? '18px' : '16px' }} gutterBottom>Estamos aqui para incluir novas ideias, sugestões e pessoas!! Preencha o formulário abaixo e envie-nos a sua mensagem 🌻.</Typography>
                                 <form onSubmit={handleSubmit}>

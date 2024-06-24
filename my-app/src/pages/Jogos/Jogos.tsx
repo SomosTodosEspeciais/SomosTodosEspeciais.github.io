@@ -7,6 +7,7 @@ const Jogos = () => {
             <div className='content'>
                 <div className='jogo'>
                     <iframe
+                        title='Jogo do Todos Somos Especiais'
                         src="https://scratch.mit.edu/projects/860189704/embed"
                         width="600"
                         height="600"

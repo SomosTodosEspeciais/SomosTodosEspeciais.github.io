@@ -4,7 +4,7 @@ import './Privacidade.css'
 const Privacidade = () => {
     return (
         <div className="Privacidade">
-            <div className='header'>Política de Privacidade</div>
+            <div className='header'> <h1>Política de Privacidade</h1></div>
             
             <div style={{ marginBottom: "3%" }}></div>
             <div className='content'>
@@ -79,6 +79,10 @@ const Privacidade = () => {
                 <p>
                     O site Todos Somos Especiais utiliza cookies exclusivamente para identificar os utilizadores e diferenciar entre utilizadores comuns e administradores.
                 </p>
+                <div style={{ marginBottom: "2.5%" }}></div>
+                <h1>Gerir Cookies</h1>
+                <p>Como gerir as cookies
+                Pode alterar as definições do seu navegador para não aceitar cookies. Para tal, consulte o website allaboutcookies.org. No entanto, se o fizer, alguns dos recursos do nosso website poderão não funcionar corretamente.</p>
                 <div style={{ marginBottom: "2.5%" }}></div>
                 <h1>Conteúdo incorporado de outros sites</h1>
                 <p>

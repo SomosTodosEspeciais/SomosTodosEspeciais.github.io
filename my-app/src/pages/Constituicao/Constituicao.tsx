@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Profile from '../../assets/Generic-Profile.jpg';
 import './Constituicao.css';
 import { useMediaQuery } from '@mui/material';
 import Ligia from '../../assets/equipa-ligia.jpg'

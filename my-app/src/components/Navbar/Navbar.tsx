@@ -3,7 +3,6 @@ import './Navbar.css'
 import icon from '../../assets/todos-icon.jpg'
 import MenuDropdown from '../MenuDropdown/MenuDropdown'
 import { useMediaQuery } from '@mui/material';
-import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const Navbar = () => {

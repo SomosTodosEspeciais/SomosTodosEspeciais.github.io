@@ -1,0 +1,96 @@
+.TermosCondicoes {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
+    align-items: center;
+
+}
+
+.TermosCondicoes .header{
+    text-align: center;
+    font-size: 28px;
+    background-color: #ffff99;
+    padding-bottom: 45px;
+    padding-top: 45px;
+    width: 100%;
+}
+
+.TermosCondicoes .content{
+    width: 80%;
+}
+
+
+
+.TermosCondicoes h1 {
+    font-size: 2.125rem;
+    margin-bottom: 20px;
+}
+
+.TermosCondicoes h2 {
+    font-size: 24px;
+}
+
+.TermosCondicoes h3 {
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.TermosCondicoes p, .TermosCondicoes ul {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.TermosCondicoes ul {
+    margin-left: 20px;
+}
+
+.TermosCondicoes ul ul {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.TermosCondicoes li {
+    margin-bottom: 10px;
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.TermosCondicoes li:last-child {
+    margin-bottom: 0;
+}
+
+
+
+@media (max-width: 900px) {
+    .TermosCondicoes h1 {
+        font-size: 26px;
+        margin-bottom: 0px;
+        text-align: center;
+    }
+    
+    .TermosCondicoes h2 {
+        font-size: 22px;
+        margin-top: 40px;
+        margin-bottom: 15px;
+    }
+    
+    .TermosCondicoes h3 {
+        font-size: 18px;
+        margin-top: 30px;
+        margin-bottom: 5px;
+    }
+    
+    .TermosCondicoes p, .TermosCondicoes ul {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+    .TermosCondicoes  .content {
+        margin: 10px auto;
+        width: 70%; 
+    }
+  }
