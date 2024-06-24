@@ -1,7 +1,8 @@
 .Footer{
-
     background-color: rgb(240, 240, 240);
     height: 125px;
+    display: flex;
+
 }
 
 
@@ -40,4 +41,17 @@
 .Footer li {
     float:left;
     padding-right: 1rem;
+}
+
+
+.Footer  a {
+    color: black; 
+    text-decoration: none; 
+    display: flex; 
+    align-items: center; 
+    height: 100%;
+}
+
+.Footer  a:hover {
+    color: gray; 
 }

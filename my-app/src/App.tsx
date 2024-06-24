@@ -12,6 +12,8 @@ import Revista from './pages/Revista/Revista';
 import Mascote from './pages/Mascote/Mascote';
 import Extras from './pages/Extras/Extras';
 import History from './pages/History/History';
+import Privacidade from './pages/Privacidade/Privacidade';
+import Termos_Condicoes from './pages/Termos_Condicoes/Termos_Condicoes';
 
 
 function App() {
@@ -29,6 +31,8 @@ function App() {
             <Route path='/mascote' element={<Mascote />} />
             <Route path='/revista' element={<Revista />} />
             <Route path='/extras' element={<Extras />} />
+            <Route path='/politica-privacidade' element={<Privacidade />} />
+            <Route path='/termos-e-condicoes' element={<Termos_Condicoes />} />
             <Route path='/historia' element={<History />} />
             <Route path='*' element={<Navigate to="/" replace />} />
           </Routes>
