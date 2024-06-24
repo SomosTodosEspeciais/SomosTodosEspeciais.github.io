@@ -234,51 +234,98 @@ const HomePage = () => {
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2} justifyContent="center">
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#A0E1A0', border: "1px groove black" }}>
-                  <Typography variant="h1" gutterBottom fontWeight={700}>
+                <StyledPaper sx={{
+                  my: 1,
+                  p: 2,
+                  height: 270,
+                  backgroundColor: '#A0E1A0',
+                  border: "1px groove black",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center"
+                }}>
+                  <Typography variant="h1" gutterBottom fontWeight={700} marginBottom={'15px'}>
                     Inclusão
                   </Typography>
-                  <Typography>
+                  <Typography sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     Acreditamos na dignidade e no valor intrínseco de cada indivíduo, independentemente de suas características ou circunstâncias
                   </Typography>
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#FCFCD5', border: "1px groove black" }}>
-                  <Typography variant="h1" gutterBottom fontWeight={700}>
+                <StyledPaper sx={{
+                  my: 1,
+                  p: 2,
+                  height: 270,
+                  backgroundColor: '#FCFCD5',
+                  border: "1px groove black",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center"
+                }}>
+                  <Typography variant="h1" gutterBottom fontWeight={700} marginBottom={'15px'}>
                     Empatia
                   </Typography>
-                  <Typography>
+                  <Typography sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     Comprometemo-nos a ouvir e compreender as experiências e perspectivas dos outros, cultivando um ambiente de respeito mútuo e compaixão
                   </Typography>
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#D7B8DA', border: "1px groove black" }}>
-                  <Typography variant="h1" gutterBottom fontWeight={700}>
+                <StyledPaper sx={{
+                  my: 1,
+                  p: 2,
+                  height: 270,
+                  backgroundColor: '#D7B8DA',
+                  border: "1px groove black",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center"
+                }}>
+                  <Typography variant="h1" gutterBottom fontWeight={700} marginBottom={'15px'}>
                     Criatividade
                   </Typography>
-                  <Typography>
+                  <Typography sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     Reconhecemos o poder transformador da arte e da expressão criativa como ferramentas para a mudança social e pessoal
                   </Typography>
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#e2b126', border: "1px groove black" }}>
-                  <Typography variant="h1" gutterBottom fontWeight={700}>
+                <StyledPaper sx={{
+                  my: 1,
+                  p: 2,
+                  height: 270,
+                  backgroundColor: '#e2b126',
+                  border: "1px groove black",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center"
+                }}>
+                  <Typography variant="h1" gutterBottom fontWeight={700} marginBottom={'15px'}>
                     Colaboração
                   </Typography>
-                  <Typography>
+                  <Typography sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     Valorizamos a colaboração e o trabalho em equipe como meios eficazes para alcançar nossos objetivos e ampliar nosso impacto na comunidade
                   </Typography>
                 </StyledPaper>
               </Grid>
               <Grid item>
-                <StyledPaper sx={{ my: 1, p: 2, height: 250, backgroundColor: '#9999CC', border: "1px groove black" }}>
+                <StyledPaper
+                  sx={{
+                    my: 1,
+                    p: 2,
+                    height: 270,
+                    backgroundColor: '#9999CC',
+                    border: "1px groove black",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center"
+                  }}
+                >
                   <Typography variant="h1" gutterBottom fontWeight={700}>
                     Compromisso
                   </Typography>
-                  <Typography>
+                  <Typography sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     Mantemos-nos firmes em nosso compromisso de agir com integridade, dedicação e determinação em busca de um mundo mais inclusivo e justo para todos
                   </Typography>
                 </StyledPaper>
@@ -300,7 +347,7 @@ const HomePage = () => {
           showButtons={false}
           height={'auto'}
         >
-          <div style={{ width: "100%", display: "flex", justifyContent:"space-between", flexDirection: isSmallScreen ? "column" : "row" }}>
+          <div style={{ width: "100%", display: "flex", justifyContent: "space-between", flexDirection: isSmallScreen ? "column" : "row" }}>
             <Typography
               variant='body1'
               lineHeight={"24px"}
