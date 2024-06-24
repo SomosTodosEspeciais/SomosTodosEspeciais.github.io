@@ -15,7 +15,7 @@ const Privacidade = () => {
 
                 <h1>Informações</h1>
                 <p>
-                    O Todos Somos Especiais é um grupo constituído por jovens, destinado à dinamização de diversas atividades no âmbito do apoio social à comunidade envolvente,  sendo o endereço do nosso website: <a href="https://somostodosespeciais.github.io/">https://somostodosespeciais.github.io/</a>, sendo o seu conteúdo propriedade dO Todos Somos Especiais.
+                    O Todos Somos Especiais é um grupo constituído por jovens, destinado à dinamização de diversas atividades no âmbito do apoio social à comunidade envolvente,  sendo o endereço do nosso website: <a href="https://somostodosespeciais.github.io/">https://somostodosespeciais.github.io/</a>, sendo o seu conteúdo propriedade do Todos Somos Especiais.
                 </p>
                 <p>
                     Este documento regula o acesso a este website, tal como a sua utilização, ao aceder a qualquer parte do mesmo o utilizador declara que aceita o que aqui se encontra escrito. Caso não aceite, por favor, não utilize este website.

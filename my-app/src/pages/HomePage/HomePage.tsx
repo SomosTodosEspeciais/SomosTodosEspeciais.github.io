@@ -11,8 +11,7 @@ import flower3 from '../../assets/flores-3.png';
 import Flower from '../../components/Flower/Flower';
 import { Key, useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import Modal from '../../components/Modal/Modal';
-import Marcia from "../../assets/equipa-marcia.jpg"
+
 
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -95,12 +94,6 @@ const HomePage = () => {
 
     calculateFlowerPositions();
   }, [isSmallScreen]);
-
-  const [isModalOpen, setIsModalOpen] = useState(true);
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
 
 
   const data = {
@@ -324,33 +317,6 @@ const HomePage = () => {
         </div>
       </div>
       <div className="lateral-right"></div>
-      {isModalOpen && (
-
-        <Modal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          titulo={"Parabéns Márcia"}
-          onSave={() => {
-            setIsModalOpen(false);
-          }}
-          showButtons={false}
-          height={'auto'}
-        >
-          <div style={{ width: "100%", display: "flex", justifyContent: "space-between", flexDirection: isSmallScreen ? "column" : "row" }}>
-            <Typography
-              variant='body1'
-              lineHeight={"24px"}
-              width={isSmallScreen ? "100%" : "60%"}
-            >
-              Um dia especial é feito de eventos especiais. 🌻
-              A equipa Todos Somos Especiais deseja-te um dia como tu, muito especial ♥️
-
-            </Typography>
-            <img src={Marcia} alt='' />
-          </div>
-        </Modal>
-      )}
-
     </div>
   );
 };
