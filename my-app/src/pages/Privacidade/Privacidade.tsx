@@ -15,7 +15,7 @@ const Privacidade = () => {
 
                 <h1>Informações</h1>
                 <p>
-                    O Todos Somos Especiais – é uma Instituição Particular de Solidariedade Social sem fins lucrativos e o endereço do nosso website é: <a href="https://somostodosespeciais.github.io/">https://somostodosespeciais.github.io/</a>, sendo o seu conteúdo propriedade dO Todos Somos Especiais.
+                    O Todos Somos Especiais é um grupo constituído por jovens, destinado à dinamização de diversas atividades no âmbito do apoio social à comunidade envolvente com o endereço do nosso website: <a href="https://somostodosespeciais.github.io/">https://somostodosespeciais.github.io/</a>, sendo o seu conteúdo propriedade dO Todos Somos Especiais.
                 </p>
                 <p>
                     Este documento regula o acesso a este website, tal como a sua utilização, ao aceder a qualquer parte do mesmo o utilizador declara que aceita o que aqui se encontra escrito. Caso não aceite, por favor, não utilize este website.
@@ -52,7 +52,7 @@ const Privacidade = () => {
 
                 <h1>Utilização dos Dados</h1>
                 <p>
-                    Com o seu consentimento, podemos usar suas informações pessoais para enviar e-mails sobre atividades, eventos, novidades e outras comunicações que possam ser do seu interesse. É possível retirar o seu consentimento a qualquer momento clicando no link de cancelamento de inscrição fornecido em nossos e-mails ou entrando em contato diretamente conosco.
+                    Com o seu consentimento, podemos usar as suas informações pessoais para enviar e-mails sobre atividades, eventos, novidades e outras comunicações que possam ser do seu interesse. É possível retirar o seu consentimento a qualquer momento clicando no link de cancelamento de inscrição fornecido nos nossos e-mails ou ao entrar em contacto diretamente conosco.
                 </p>
 
                 <p>
@@ -92,7 +92,7 @@ const Privacidade = () => {
                 <div style={{ marginBottom: "2.5%" }}></div>
                 <h1>Compromisso do utilizador</h1>
                 <p>
-                    O Todos Somos Especiais pressupõe que os dados são introduzidos pelo seu titular ou por uma pessoa autorizada por este, assim como que são corretos e exatos. Cabe a si a atualização dos seus próprios dados. Portanto, é responsável pela veracidade dos mesmos e O Todos Somos Especiais não será responsável pela inexatidão dos dados pessoais dos seus associados. Ao efetuar uma inscrição está a aceitar a nossa Política de Privacidade, declarando que toda a informação que nos faculta é verdadeira e assumindo que é o único responsável de qualquer dano ou prejuízo que a referida informação possa causar à Todos Somos Especiais. É obrigatória a aceitação desta Política de Privacidade para concluir uma inscrição nO Todos Somos Especiais.
+                    O Todos Somos Especiais pressupõe que os dados são introduzidos pelo seu titular ou por uma pessoa autorizada por este, assim como que são corretos e exatos. Cabe a si a atualização dos seus próprios dados. Portanto, é responsável pela veracidade dos mesmos e O Todos Somos Especiais não será responsável pela inexatidão dos dados pessoais dos seus associados. Ao efetuar uma inscrição está a aceitar a nossa Política de Privacidade, declarando que toda a informação que nos faculta é verdadeira e assumindo que é o único responsável de qualquer dano ou prejuízo que a referida informação possa causar ao Todos Somos Especiais. É obrigatória a aceitação desta Política de Privacidade para concluir uma inscrição no Todos Somos Especiais.
                 </p>
                 <p>
                     Através de uma visita comum ao nosso website, os utilizadores não facultam informação pessoal alguma nem ficam obrigados a facultar. Os utilizadores comprometem-se a navegar pelo website e a utilizar o conteúdo de forma correta, não realizando nenhum tipo de ação fraudulenta sobre o mesmo.
