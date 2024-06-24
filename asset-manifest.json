@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.6c009085.css",
-    "main.js": "/static/js/main.f445b4bd.js",
+    "main.js": "/static/js/main.45afc0f8.js",
     "static/js/453.68693753.chunk.js": "/static/js/453.68693753.chunk.js",
     "static/media/extra-feira-0.mp4": "/static/media/extra-feira-0.289f7d96bbae34350e7b.mp4",
     "static/media/gatos-1.mp4": "/static/media/gatos-1.72480adc81b8af86274a.mp4",
@@ -41,6 +41,7 @@
     "static/media/gatos-12.jpeg": "/static/media/gatos-12.e6dc94189580ff3c6412.jpeg",
     "static/media/limpeza-4.jpg": "/static/media/limpeza-4.ce05740bc36030093019.jpg",
     "static/media/gatos-8.jpeg": "/static/media/gatos-8.42299160991f1cd937a4.jpeg",
+    "static/media/equipa-joana.jpeg": "/static/media/equipa-joana.341229a170a33c3423c8.jpeg",
     "static/media/limpeza-1.jpg": "/static/media/limpeza-1.e66479e3b458777f1fdb.jpg",
     "static/media/equipa-sandra.jpeg": "/static/media/equipa-sandra.f7ccaeaf695bab558129.jpeg",
     "static/media/equipa-nani.jpeg": "/static/media/equipa-nani.9dd71e3469e3a96e2628.jpeg",
@@ -82,15 +83,14 @@
     "static/media/equipa-andre.jpg": "/static/media/equipa-andre.4eed7844ec32c3a08e8f.jpg",
     "static/media/puzzflor.jpg": "/static/media/puzzflor.3d896b67cef1f8608b19.jpg",
     "static/media/instagram.png": "/static/media/instagram.edb90ecc706a7a25542b.png",
-    "static/media/Generic-Profile.jpg": "/static/media/Generic-Profile.0485b1b3d9fdd7d2f959.jpg",
     "static/media/todos-icon.jpg": "/static/media/todos-icon.f5995624cf52aff3648f.jpg",
     "index.html": "/index.html",
     "main.6c009085.css.map": "/static/css/main.6c009085.css.map",
-    "main.f445b4bd.js.map": "/static/js/main.f445b4bd.js.map",
+    "main.45afc0f8.js.map": "/static/js/main.45afc0f8.js.map",
     "453.68693753.chunk.js.map": "/static/js/453.68693753.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6c009085.css",
-    "static/js/main.f445b4bd.js"
+    "static/js/main.45afc0f8.js"
   ]
 }
