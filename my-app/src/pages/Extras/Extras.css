@@ -5,6 +5,9 @@
     flex-direction: column;
     min-height: 80vh;
     scroll-behavior: smooth;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .Extras .header{
@@ -13,4 +16,26 @@
     background-color: #ffff99;
     padding-bottom: 45px;
     padding-top: 45px;
+    width: 100%;
 }
+
+.Extras .content{
+    margin-top: 2.5%;
+    width: 80%;
+    
+}
+
+
+.Extras .content p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+@media (max-width: 900px) {
+    .Extras .content p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+  }

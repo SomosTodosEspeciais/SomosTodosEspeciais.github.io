@@ -45,7 +45,7 @@ const Navbar = () => {
     }
 
     const Item8: Item = {
-        nome: 'Extras',
+        nome: 'Bastidores',
         link: '/extras'
     }
 
@@ -80,7 +80,7 @@ const Navbar = () => {
                                 <li><Link className='button-nav-icon' to={'/constituicao'} > Constituição</Link></li>
                                 <li><MenuDropdown itens={[Item1, Item2, Item3]} titulo={'Dinâmica'} ></MenuDropdown></li>
                                 <li><Link className='button-nav-icon' to={'/mascote'} > Mascote </Link></li>
-                                <li><Link className='button-nav-icon' to={'/extras'} > Extras </Link></li>
+                                <li><Link className='button-nav-icon' to={'/extras'} > Bastidores </Link></li>
                                 <li><Link className='button-nav-icon' to={'/contacto'} > Contacto</Link></li>
                             </ul>
 

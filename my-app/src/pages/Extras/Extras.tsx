@@ -78,7 +78,7 @@ const Extras = () => {
         const startIndex = (pageIndex - 1) * atividadesPorPagina;
         const endIndex = startIndex + atividadesPorPagina;
         setShowExtras(JSON.parse(JSON.stringify(atividades.slice(startIndex, endIndex))));
-    }, [pageIndex]); 
+    }, [pageIndex]);
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPageIndex(value);
@@ -89,7 +89,11 @@ const Extras = () => {
     return (
         <div className='Extras'>
             <div className='header'>
-                <h1>Extras</h1>
+                <h1>Bastidores</h1>
+            </div>
+            <div className="content">
+                <p>Bem vindos aos nossos "bastidores". Um espaço mais informal mas exposto por ser fundamental no, e para, o grupo. Aqui encontrarão a fase de preparação das diversas atividades, assim como momentos de diversão e descontração decorrentes das respetivas ações. Afinal, Todos Somos Especiais é um grupo jovem caracterizado pela sua boa disposição, naturalidade e união, sendo estes alguns dos momentos que o exprimem. ❤️</p>
+
             </div>
             {showExtras.map(({ titulo, imagens, descricao }, index) => (
                 <div key={`${pageIndex}-${index}`}>
