@@ -149,16 +149,13 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        text-align: center;
         margin-top: 100px;
     }
     
     .Constituicao .person {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+        text-align: left;
         width: 80%;
         margin-bottom: 20px;
     }
@@ -171,11 +168,7 @@
     }
     
     .Constituicao .person-description {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 30%;
+        width: 90%;
         margin-left: 0;
         margin-right: 0;
     }
