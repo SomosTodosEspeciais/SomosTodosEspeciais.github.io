@@ -1,97 +1,239 @@
-import { Link } from 'react-router-dom'
-import './Navbar.css'
-import icon from '../../assets/todos-icon.jpg'
-import MenuDropdown from '../MenuDropdown/MenuDropdown'
+import React, { useState } from 'react';
+import './Navbar.css';
+import icon from '../../assets/todos-icon.jpg';
+import MenuDropdown from '../MenuDropdown/MenuDropdown';
 import { useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useAuth } from '../../context/AuthContext/AuthContext';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import Login from '../Login/Login';
+import { auth } from '../../Firebase/firebase';
+import Signup from '../Signup/Signup';
 
 const Navbar = () => {
-    interface Item {
-        nome: string;
-        link: string;
-    }
+  const { isAdmin, emailVerified, currentUser } = useAuth();
+  const [showLogin, setShowLogin] = useState<boolean>(false);
+  const [showSignup, setShowSignup] = useState<boolean>(false);
 
-    const Item1: Item = {
-        nome: 'Atividades',
-        link: '/atividades'
-    }
-    const Item2: Item = {
-        nome: 'Jogos',
-        link: '/jogos'
-    }
+  const isSmallScreen = useMediaQuery('(max-width: 900px)');
 
-    const Item3: Item = {
-        nome: 'Revista',
-        link: '/revista'
-    }
+  const closeModals = () => {
+    setShowLogin(false);
+    setShowSignup(false);
+  };
 
-    const Item4: Item = {
-        nome: ' Página Inicial',
-        link: '/'
-    }
-    const Item5: Item = {
-        nome: 'Constituição',
-        link: '/constituicao'
-    }
+  const handleLogout = () => {
+    auth.signOut(); // Função de logout do Firebase
+  };
 
-    const Item6: Item = {
-        nome: 'Contacto',
-        link: '/contacto'
-    }
+  // Itens do menu
+  const menuItems = [
+    { nome: 'Atividades', link: '/atividades' },
+    { nome: 'Jogos', link: '/jogos' },
+    { nome: 'Revista', link: '/revista' },
+    { nome: 'Página Inicial', link: '/' },
+    { nome: 'Constituição', link: '/constituicao' },
+    { nome: 'Contacto', link: '/contacto' },
+    { nome: 'Mascote', link: '/mascote' },
+    { nome: 'Bastidores', link: '/extras' },
+    { nome: 'História', link: '/historia' },
+  ];
 
-    const Item7: Item = {
-        nome: 'Mascote',
-        link: '/mascote'
-    }
+  return (
+    <div className='Navbar'>
+      <nav className='navbar'>
+        {isSmallScreen ? (
+          <>
+            <ul>
+              <li>
+                <Link className='button-nav-icon' to={'/'}>
+                  <img src={icon} alt='' />
+                </Link>
+              </li>
+              <li>
+                <MenuDropdown itens={menuItems} titulo={''} icon={MenuIcon} />
+              </li>
+            </ul>
+            <ul className='second-nav'>
+              {currentUser && emailVerified ? (
+                <li>
+                  <Button
+                    variant='outlined'
+                    onClick={handleLogout}
+                    sx={{
+                      border: '1px solid black',
+                      color: 'black',
+                      '&:hover': {
+                        borderColor: 'black',
+                        backgroundColor: '#FFFFDA',
+                      },
+                    }}
+                  >
+                    Logout
+                  </Button>
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <Button
+                      variant='outlined'
+                      onClick={() => {
+                        setShowSignup(false);
+                        setShowLogin(true);
+                      }}
+                      sx={{
+                        border: '1px solid black',
+                        color: 'black',
+                        '&:hover': {
+                          borderColor: 'black',
+                          backgroundColor: '#FFFFDA',
+                        },
+                      }}
+                    >
+                      Login
+                    </Button>
+                  </li>
+                  <li>
+                    <Button
+                      variant='outlined'
+                      onClick={() => {
+                        setShowSignup(true);
+                        setShowLogin(false);
+                      }}
+                      sx={{
+                        border: '1px solid black',
+                        color: 'black',
+                        '&:hover': {
+                          borderColor: 'black',
+                          backgroundColor: '#FFFFDA',
+                        },
+                      }}
+                    >
+                      Criar Conta
+                    </Button>
+                  </li>
+                </>
+              )}
+            </ul>
+          </>
+        ) : (
+          <>
+            <ul>
+              <li>
+                <Link className='button-nav-icon' to={'/'}>
+                  <img src={icon} alt='' />
+                </Link>
+              </li>
+              <li>
+                <Link className='button-nav-icon' to={'/'}>
+                  Página Inicial
+                </Link>
+              </li>
+              <li>
+                <Link className='button-nav-icon' to={'/historia'}>
+                  História
+                </Link>
+              </li>
+              <li>
+                <Link className='button-nav-icon' to={'/constituicao'}>
+                  Constituição
+                </Link>
+              </li>
+              <li>
+                <MenuDropdown itens={[menuItems[0], menuItems[1], menuItems[2]]} titulo={'Dinâmica'} />
+              </li>
+              <li>
+                <Link className='button-nav-icon' to={'/mascote'}>
+                  Mascote
+                </Link>
+              </li>
+              <li>
+                <Link className='button-nav-icon' to={'/extras'}>
+                  Bastidores
+                </Link>
+              </li>
+              <li>
+                <Link className='button-nav-icon' to={'/contacto'}>
+                  Contacto
+                </Link>
+              </li>
+              {isAdmin && (
+                <li>
+                  <Link className='button-nav-icon' to='/admin'>
+                    AdminView
+                  </Link>
+                </li>
+              )}
+            </ul>
+            <ul className='second-nav'>
+              {currentUser && emailVerified ? (
+                <li>
+                  <Button
+                    variant='outlined'
+                    onClick={handleLogout}
+                    sx={{
+                      border: '1px solid black',
+                      color: 'black',
+                      '&:hover': {
+                        borderColor: 'black',
+                        backgroundColor: '#FFFFDA',
+                      },
+                    }}
+                  >
+                    Logout
+                  </Button>
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <Button
+                      variant='outlined'
+                      onClick={() => {
+                        setShowSignup(false);
+                        setShowLogin(true);
+                      }}
+                      sx={{
+                        border: '1px solid black',
+                        color: 'black',
+                        '&:hover': {
+                          borderColor: 'black',
+                          backgroundColor: '#FFFFDA',
+                        },
+                      }}
+                    >
+                      Login
+                    </Button>
+                  </li>
+                  <li>
+                    <Button
+                      variant='outlined'
+                      onClick={() => {
+                        setShowSignup(true);
+                        setShowLogin(false);
+                      }}
+                      sx={{
+                        border: '1px solid black',
+                        color: 'black',
+                        '&:hover': {
+                          borderColor: 'black',
+                          backgroundColor: '#FFFFDA',
+                        },
+                      }}
+                    >
+                      Criar Conta
+                    </Button>
+                  </li>
+                </>
+              )}
+            </ul>
+          </>
+        )}
+      </nav>
+      {showLogin && <Login onClose={closeModals} />}
+      {showSignup && <Signup onClose={closeModals} />}
+    </div>
+  );
+};
 
-    const Item8: Item = {
-        nome: 'Bastidores',
-        link: '/extras'
-    }
-
-    const Item9: Item = {
-        nome: 'História',
-        link: '/historia'
-    }
-
-
-    const isSmallScreen = useMediaQuery('(max-width: 900px)');
-
-    return (
-        <>
-
-            <div className='Navbar'>
-                <nav className='navbar'>
-                    {isSmallScreen ?
-
-                        <>
-                            <ul>
-                                <li><Link className='button-nav-icon' to={'/'} ><img src={icon} alt="" /></Link></li>
-                                <li><MenuDropdown itens={[Item4,Item9, Item5, Item1, Item3, Item2, Item7, Item8, Item6]} titulo={""} icon={MenuIcon} ></MenuDropdown></li>
-                            </ul>
-                        </>
-
-                        :
-                        <>
-                            <ul>
-                                <li><Link className='button-nav-icon' to={'/'} ><img src={icon} alt="" /></Link></li>
-                                <li><Link className='button-nav-icon' to={'/'} > Página Inicial</Link></li>
-                                <li><Link className='button-nav-icon' to={'/historia'} > História </Link></li>
-                                <li><Link className='button-nav-icon' to={'/constituicao'} > Constituição</Link></li>
-                                <li><MenuDropdown itens={[Item1, Item2, Item3]} titulo={'Dinâmica'} ></MenuDropdown></li>
-                                <li><Link className='button-nav-icon' to={'/mascote'} > Mascote </Link></li>
-                                <li><Link className='button-nav-icon' to={'/extras'} > Bastidores </Link></li>
-                                <li><Link className='button-nav-icon' to={'/contacto'} > Contacto</Link></li>
-                            </ul>
-
-                        </>
-                    }
-
-
-                </nav>
-            </div>
-        </>
-
-    )
-}
-export default Navbar
+export default Navbar;

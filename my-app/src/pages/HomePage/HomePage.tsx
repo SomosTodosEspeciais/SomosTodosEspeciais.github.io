@@ -32,6 +32,7 @@ const HomePage = () => {
   const isSmallScreen = useMediaQuery('(max-width: 900px)');
   const [flowers, setFlowers] = useState<FlowerPosition[]>([]);
 
+
   useEffect(() => {
     const calculateFlowerPositions = () => {
       const homePageElement = document.querySelector('.HomePage') as HTMLElement | null;
@@ -100,8 +101,8 @@ const HomePage = () => {
     generalObjective: 'Fomentar uma cultura de inclusão e diversidade em todos os âmbitos da sociedade, com ênfase especial na ação comunitária e na solidariedade como ferramentas de transformação social.',
     specificObjectives: [
       'Sensibilizar e educar a comunidade sobre a importância da inclusão e da valorização da diversidade.',
-      'Promover o acesso equitativo à educação e às oportunidades para todos os membros da sociedade, independentemente de suas origens ou condições.',
-      'Capacitar os jovens para se tornarem agentes de mudança, incentivando-os a usar suas habilidades e paixões para promover o bem comum.',
+      'Promover o acesso equitativo à educação e às oportunidades para todos os membros da sociedade, independentemente das suas origens ou condições.',
+      'Capacitar os jovens para se tornarem agentes de mudança, incentivando-os a usar as suas habilidades e paixões para promover o bem comum.',
       'Estimular o diálogo intercultural e a colaboração entre diferentes grupos e comunidades, visando à construção de sociedades mais coesas e solidárias.',
     ],
     cores: [
@@ -230,7 +231,7 @@ const HomePage = () => {
                     Inclusão
                   </Typography>
                   <Typography sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    Acreditamos na dignidade e no valor intrínseco de cada indivíduo, independentemente de suas características ou circunstâncias
+                    Acreditamos na dignidade e no valor intrínseco de cada indivíduo, independentemente das suas características ou circunstâncias
                   </Typography>
                 </StyledPaper>
               </Grid>
@@ -287,7 +288,7 @@ const HomePage = () => {
                     Colaboração
                   </Typography>
                   <Typography sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    Valorizamos a colaboração e o trabalho em equipe como meios eficazes para alcançar nossos objetivos e ampliar nosso impacto na comunidade
+                    Valorizamos a colaboração e o trabalho em equipa como meios eficazes para alcançar os nossos objetivos e ampliar o nosso impacto na comunidade
                   </Typography>
                 </StyledPaper>
               </Grid>
@@ -308,7 +309,7 @@ const HomePage = () => {
                     Compromisso
                   </Typography>
                   <Typography sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    Mantemos-nos firmes em nosso compromisso de agir com integridade, dedicação e determinação em busca de um mundo mais inclusivo e justo para todos
+                    Mantemos-nos firmes no nosso compromisso de agir com integridade, dedicação e determinação em busca de um mundo mais inclusivo e justo para todos
                   </Typography>
                 </StyledPaper>
               </Grid>

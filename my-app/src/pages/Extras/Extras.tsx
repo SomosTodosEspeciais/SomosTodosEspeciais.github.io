@@ -4,6 +4,9 @@ import '../../components/SlideImages/SlideImages.css';
 import './Extras.css';
 import { CarouselProvider } from "pure-react-carousel";
 import Pagination from '@mui/material/Pagination';
+import { useMediaQuery } from '@mui/material';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const images = [
     { url: require('../../assets/extra-revista-1.jpeg') },
@@ -54,13 +57,20 @@ const atividades = [
     { titulo: "Encerramento da Semana Incluir + 2023 na Biblioteca Lúcio Craveiro da Silva", imagens: images, descricao: descricaoGatil },
     { titulo: "Live com o Sr. Braga do 'Inclusão e Acessibilidade Para Todos'", imagens: images3, descricao: descricaoRevista },
     { titulo: "Desenvolvimento do Jogo no Scratch", imagens: images4, descricao: descricaoRevista },
-    { titulo: "Feirinha", imagens: images2, descricao: descricaoRevista },
+    { titulo: "Mercadinho de Primavera", imagens: images2, descricao: descricaoRevista },
     { titulo: "Reunião do Todos Somos Especiais", imagens: images6, descricao: descricaoRevista },
-    { titulo: "Estilo Todos somos especiais", imagens: images7, descricao: "" },
+    { titulo: "Estilo Todos Somos Especiais", imagens: images7, descricao: "" },
 ];
 
 
 const Extras = () => {
+
+    useEffect(() => {
+        AOS.init({
+            once: false, // Permitir animações repetidas ao subir na página
+        });
+    }, []);
+
 
     const atividadesPorPagina = 2;
     const paginasTotal = Math.ceil(atividades.length / atividadesPorPagina);
@@ -84,6 +94,8 @@ const Extras = () => {
         setPageIndex(value);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
+    const isSmallScreen = useMediaQuery('(max-width: 900px)');
 
 
     return (
@@ -115,6 +127,12 @@ const Extras = () => {
                     <Pagination count={paginasTotal} page={pageIndex} onChange={handleChange} size="large" />
                 </div>
             )}
+            <div className='citation' data-aos={isSmallScreen ? "fade-up" : "fade-right"}>
+                <div className='content2'>
+                    <p><q>As coisas mais belas são ditadas pela loucra e escritas pela razão</q></p>
+                    <p className='author'>- André Gide</p>
+                </div>
+            </div>
         </div>
     );
 };

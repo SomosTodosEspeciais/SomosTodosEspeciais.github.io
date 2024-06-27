@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom';
+import { Link, Navigate, Route, Routes, HashRouter } from 'react-router-dom';
 import HomePage from "./pages/HomePage/HomePage";
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
@@ -13,14 +13,17 @@ import History from './pages/History/History';
 import Privacidade from './pages/Privacidade/Privacidade';
 import TermosCondicoes from './pages/TermosCondicoes/TermosCondicoes';
 import CookieConsent from "react-cookie-consent";
+import { AuthProvider } from './context/AuthContext/AuthContext';
+import AdminView from './pages/AdminView/AdminView';
+import { ProtectedRoute } from './ProtectedRoute/ProtectedRoute';
 
 
 function App() {
-    return (
+  return (
     <div className="App">
-      <BrowserRouter>
-        <CookieConsent 
-          
+      <HashRouter  >
+        <CookieConsent
+
           location="bottom"
           buttonText="Aceitar"
           cookieName="myAwesomeCookieName2"
@@ -31,26 +34,33 @@ function App() {
           Este website usa cookies para otimizar a sua experiência.{" "}
           <Link to={"/politica-privacidade"}>Detalhes.</Link>
         </CookieConsent>
-        <Navbar />
-        <div className="content">
-          <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/atividades' element={<Atividades />} />
-            <Route path='/contacto' element={<Contactos />} />
-            <Route path='/jogos' element={<Jogos />} />
-            <Route path='/constituicao' element={<Constituicao />} />
-            <Route path='/mascote' element={<Mascote />} />
-            <Route path='/revista' element={<Revista />} />
-            <Route path='/extras' element={<Extras />} />
-            <Route path='/politica-privacidade' element={<Privacidade />} />
-            <Route path='/termos-e-condicoes' element={<TermosCondicoes />} />
-            <Route path='/historia' element={<History />} />
-            <Route path='*' element={<Navigate to="/" replace />} />
-          </Routes>
-        </div>
+        <AuthProvider>
+          <Navbar />
+          <div className="content">
+            <Routes>
+              <Route path='/' element={<HomePage />} />
+              <Route path='/atividades' element={<Atividades />} />
+              <Route path='/contacto' element={<Contactos />} />
+              <Route path='/jogos' element={<Jogos />} />
+              <Route path='/constituicao' element={<Constituicao />} />
+              <Route path='/mascote' element={<Mascote />} />
+              <Route path='/revista' element={<Revista />} />
+              <Route path='/extras' element={<Extras />} />
+              <Route path='/politica-privacidade' element={<Privacidade />} />
+              <Route path='/termos-e-condicoes' element={<TermosCondicoes />} />
+              <Route path='/historia' element={<History />} />
+              <Route path='/admin' element={
+                <ProtectedRoute>
+                  <AdminView />
+                </ProtectedRoute>
+              } />
+              <Route path='*' element={<Navigate to="/" replace />} />
+            </Routes>
+          </div>
 
-        <Footer />
-      </BrowserRouter>
+          <Footer />
+        </AuthProvider>
+      </HashRouter >
     </div>
   );
 }

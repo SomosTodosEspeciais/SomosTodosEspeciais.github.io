@@ -1,0 +1,69 @@
+.SignUp {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    background: none;
+    height: 450px;
+}
+
+.SignUp .signUp-form{
+    background-color: rgb(248, 248, 248);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    height: 100%;
+}
+
+.SignUp .signUp-form input{
+    width: 97%;
+    height: 40px;
+    
+}
+
+.SignUp .signUp-form label{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-left: 25px;
+    text-align: left;
+    width: 80%;
+    
+}
+
+.SignUp .error {
+    width: 65%;
+}
+
+
+.SignUp .error p{
+    margin: 0;
+    
+}
+
+.SignUp .modal-close {
+
+    position: absolute; 
+    top: 10px;
+    right: 10px; 
+    cursor: pointer;
+}
+
+.SignUp .modal-close img {
+    width: 30px; 
+    height: 30px; 
+}
+
+
+
+
+
+
