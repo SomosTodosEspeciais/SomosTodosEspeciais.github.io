@@ -8,8 +8,8 @@ import { useAuth } from '../../context/AuthContext/AuthContext';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import Login from '../Login/Login';
-import { auth } from '../../Firebase/firebase';
 import Signup from '../Signup/Signup';
+import { auth } from '../../Firebase/firebase';
 
 const Navbar = () => {
   const { isAdmin, emailVerified, currentUser } = useAuth();
@@ -57,22 +57,24 @@ const Navbar = () => {
             </ul>
             <ul className='second-nav'>
               {currentUser && emailVerified ? (
-                <li>
-                  <Button
-                    variant='outlined'
-                    onClick={handleLogout}
-                    sx={{
-                      border: '1px solid black',
-                      color: 'black',
-                      '&:hover': {
-                        borderColor: 'black',
-                        backgroundColor: '#FFFFDA',
-                      },
-                    }}
-                  >
-                    Logout
-                  </Button>
-                </li>
+                <>
+                  <li>
+                    <Button
+                      variant='outlined'
+                      onClick={handleLogout}
+                      sx={{
+                        border: '1px solid black',
+                        color: 'black',
+                        '&:hover': {
+                          borderColor: 'black',
+                          backgroundColor: '#FFFFDA',
+                        },
+                      }}
+                    >
+                      Logout
+                    </Button>
+                  </li>
+                </>
               ) : (
                 <>
                   <li>
@@ -168,22 +170,24 @@ const Navbar = () => {
             </ul>
             <ul className='second-nav'>
               {currentUser && emailVerified ? (
-                <li>
-                  <Button
-                    variant='outlined'
-                    onClick={handleLogout}
-                    sx={{
-                      border: '1px solid black',
-                      color: 'black',
-                      '&:hover': {
-                        borderColor: 'black',
-                        backgroundColor: '#FFFFDA',
-                      },
-                    }}
-                  >
-                    Logout
-                  </Button>
-                </li>
+                <>
+                  <li>
+                    <Button
+                      variant='outlined'
+                      onClick={handleLogout}
+                      sx={{
+                        border: '1px solid black',
+                        color: 'black',
+                        '&:hover': {
+                          borderColor: 'black',
+                          backgroundColor: '#FFFFDA',
+                        },
+                      }}
+                    >
+                      Logout
+                    </Button>
+                  </li>
+                </>
               ) : (
                 <>
                   <li>
