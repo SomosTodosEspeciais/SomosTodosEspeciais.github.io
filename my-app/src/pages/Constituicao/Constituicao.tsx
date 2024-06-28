@@ -19,7 +19,7 @@ const descricao_Ligia = "O meu nome é Lígia Mano, nasci no ano de 2001 e atual
 const descricao_andre = "O meu nome é André Ferreira, nasci no ano 2000 e atualmente estou a terminar o meu mestrado em Engenharia Informática na Universidade do Minho. Sou uma pessoa que aprecia a informática (tendo criado este website) e tenho um gosto peculiar pela matemática. Acredito que a diversidade deve ser reconhecida e valorizada, e é isso que me motiva a contribuir para esta causa."
 const descricao_cici = 'O meu nome é Cecília da Cruz, nasci no ano de 2001 e sou de Vila Verde. Atualmente, estou a frequentar um Mestrado na Universidade do Minho e pretendo continuar meus estudos e fortalecer os meus conhecimentos. Uma vez, Isaac Newton afirmou "Construímos muros demais e pontes de menos.”, neste contexto a construção de pontes promove a diversidade, a inclusão e a cooperação, para um mundo mais harmonioso e justo, é essencial que direcionemos nossos esforços para a construção de pontes, fomentando o entendimento mútuo e a solidariedade.'
 const descricao_marcia = 'O meu nome é Márcia Gonçalves, nasci em 2001, e estou atualmente a frequentar um mestrado em Educação, com especialização em Formação, Trabalho e Recursos Humanos, na Universidade do Minho.\n A menina que outrora sonhava em crescer e ajudar, hoje aspira participar ativamente na criação de projetos que possam transformar a realidade presente num futuro mais promissor. Um exemplo disso é o projeto "Todos Somos Especiais".\nE porque a educação é o elo que une todos os seres humanos, que possamos todos ser verdadeiras inspirações na vida uns dos outros, contribuindo para um mundo melhor através das nossas singularidades .'
-
+const descricao_nani = 'O meu nome é Hernâni Lopes, tenho 21 anos, estou a trabalhar mas no processo de tirar um curso de barbeiro e começar a trabalhar na área.\nSempre fui um rapaz brincalhão, às vezes demais, gosto de ajudar quem precisa, e desde pequeno que cresci rodeada de pessoas com necessidades especiais.\nFui introduzido ao grupo através da Márcia, e comecei a ajudar com algumas coisinhas até que decidi juntar-me.\nEspero poder ajudar o Todos somos Especiais a crescer e a passar a nossa mensagem.'
 const Constituicao = () => {
     useEffect(() => {
         AOS.init({
@@ -30,10 +30,12 @@ const Constituicao = () => {
 
 
     const serviceCategories = [
-        { name: 'Márcia Gonçalves', description: descricao_marcia, img: Marcia, cargos: [
-            "Co-fundadora do grupo Todos Somos Especiais;",
-            "Direção e gestão do grupo;",
-            "Criação e procura de atividades culturais."] },
+        {
+            name: 'Márcia Gonçalves', description: descricao_marcia, img: Marcia, cargos: [
+                "Co-fundadora do grupo Todos Somos Especiais;",
+                "Direção e gestão do grupo;",
+                "Criação e procura de atividades culturais."]
+        },
         {
             name: 'Lígia Mano', description: descricao_Ligia, img: Ligia, cargos: [
                 "Co-fundadora do grupo Todos Somos Especiais;",
@@ -43,7 +45,7 @@ const Constituicao = () => {
         { name: 'Sandra Almeida', description: "Texto da Pessoa 3", img: Sandra, cargos: [] },
         { name: 'Paulo Miranda', description: "Texto da Pessoa 4", img: Paulo, cargos: [] },
         { name: 'Joana de Carvalho', description: "Texto da Pessoa 5", img: Joana, cargos: [] },
-        { name: 'Hernani Lopes', description: "Texto da Pessoa 6", img: Nani, cargos: [] },
+        { name: 'Hernani Lopes', description: descricao_nani, img: Nani, cargos: ["Porta Voz."] },
         { name: 'Cecília da Cruz', description: descricao_cici, img: Cici, cargos: ["Marketing;", "Criador de Conteúdos."] },
         { name: 'André Ferreira', description: descricao_andre, img: Andre, cargos: ["Tesoureiro;", "Informático."] }
     ];
@@ -109,7 +111,7 @@ const Constituicao = () => {
                                             ))}
                                         </ul>
                                     </div>
-                                    <div style={{ display: "flex", justifyContent: "left", width: "100%", flexDirection: "column", whiteSpace:"break-spaces" }}>
+                                    <div style={{ display: "flex", justifyContent: "left", width: "100%", flexDirection: "column", whiteSpace: "break-spaces" }}>
                                         <h5>Apresentação:</h5>
                                         <p>{description}</p>
                                     </div>
@@ -132,7 +134,7 @@ const Constituicao = () => {
                                                     ))}
                                                 </ul>
                                             </div>
-                                            <div style={{ display: "flex", justifyContent: "left", width: "100%", flexDirection: "column" }}>
+                                            <div style={{ display: "flex", justifyContent: "left", width: "100%", flexDirection: "column", whiteSpace: "break-spaces" }}>
                                                 <h5>Apresentação:</h5>
                                                 <p>{description}</p>
                                             </div>
@@ -153,7 +155,7 @@ const Constituicao = () => {
                                                     ))}
                                                 </ul>
                                             </div>
-                                            <div style={{ display: "flex", justifyContent: "left", width: "100%", flexDirection: "column" }}>
+                                            <div style={{ display: "flex", justifyContent: "left", width: "100%", flexDirection: "column", whiteSpace: "break-spaces" }}>
                                                 <h5>Apresentação:</h5>
                                                 <p>{description}</p>
                                             </div>

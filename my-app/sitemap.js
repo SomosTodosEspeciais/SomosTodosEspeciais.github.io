@@ -2,15 +2,15 @@
 const hostname = 'https://somostodosespeciais.github.io';
 
 const urls = [
-  { url: '/', changefreq: 'daily', priority: 1 },
-  { url: '/atividades', changefreq: 'monthly', priority: 0.8 },
-  { url: '/contacto', changefreq: 'monthly', priority: 0.8 },
-  { url: '/jogos', changefreq: 'monthly', priority: 0.8 },
-  { url: '/constituicao', changefreq: 'monthly', priority: 0.8 },
-  { url: '/mascote', changefreq: 'monthly', priority: 0.8 },
-  { url: '/extras', changefreq: 'monthly', priority: 0.8 },
-  { url: '/revista', changefreq: 'monthly', priority: 0.8 },
-  { url: '/historia', changefreq: 'monthly', priority: 0.8 },
+  { url: '#/', changefreq: 'daily', priority: 1 },
+  { url: '#/atividades', changefreq: 'monthly', priority: 0.8 },
+  { url: '#/contacto', changefreq: 'monthly', priority: 0.8 },
+  { url: '#/jogos', changefreq: 'monthly', priority: 0.8 },
+  { url: '#/constituicao', changefreq: 'monthly', priority: 0.8 },
+  { url: '#/mascote', changefreq: 'monthly', priority: 0.8 },
+  { url: '#/extras', changefreq: 'monthly', priority: 0.8 },
+  { url: '#/revista', changefreq: 'monthly', priority: 0.8 },
+  { url: '#/historia', changefreq: 'monthly', priority: 0.8 },
 ];
 
 
