@@ -36,7 +36,6 @@ function App() {
         </CookieConsent>
         <AuthProvider>
           <Navbar />
-          <div className="content">
             <Routes>
               <Route path='/' element={<HomePage />} />
               <Route path='/atividades' element={<Atividades />} />
@@ -56,7 +55,7 @@ function App() {
               } />
               <Route path='*' element={<Navigate to="/" replace />} />
             </Routes>
-          </div>
+          
 
           <Footer />
         </AuthProvider>

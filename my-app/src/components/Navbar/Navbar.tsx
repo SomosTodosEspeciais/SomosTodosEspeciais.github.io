@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Navbar.css';
 import icon from '../../assets/todos-icon.jpg';
 import MenuDropdown from '../MenuDropdown/MenuDropdown';
@@ -10,6 +10,21 @@ import { Link } from 'react-router-dom';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import { auth } from '../../Firebase/firebase';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import PersonIcon from '@mui/icons-material/Person';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
+import PersonAdd from '@mui/icons-material/PersonAdd';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
 
 const Navbar = () => {
   const { isAdmin, emailVerified, currentUser } = useAuth();
@@ -17,6 +32,15 @@ const Navbar = () => {
   const [showSignup, setShowSignup] = useState<boolean>(false);
 
   const isSmallScreen = useMediaQuery('(max-width: 900px)');
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const closeModals = () => {
     setShowLogin(false);
@@ -26,6 +50,34 @@ const Navbar = () => {
   const handleLogout = () => {
     auth.signOut(); // Função de logout do Firebase
   };
+
+  const [userData, setUserData] = useState<{ name: string; email: string } | null>(null);
+
+  useEffect(() => {
+    if (currentUser) {
+      const db = getFirestore();
+      const fetchUserData = async () => {
+        try {
+          const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+          if (userDoc.exists()) {
+            const userDataFromFirestore = userDoc.data();
+            if (userDataFromFirestore) {
+              setUserData({
+                name: userDataFromFirestore.name,
+                email: currentUser.email || ''
+              });
+            }
+          } else {
+            console.log('Documento do usuário não encontrado.');
+          }
+        } catch (error) {
+          console.error('Erro ao buscar dados do usuário:', error);
+        }
+      };
+
+      fetchUserData();
+    }
+  }, [currentUser]);
 
   // Itens do menu
   const menuItems = [
@@ -56,35 +108,92 @@ const Navbar = () => {
               </li>
             </ul>
             <ul className='second-nav'>
-              {currentUser && emailVerified ? (
+              {currentUser && emailVerified && userData ? (
                 <>
                   <li>
-                    <Button
-                      variant='outlined'
-                      onClick={handleLogout}
-                      sx={{
-                        border: '1px solid black',
-                        color: 'black',
-                        '&:hover': {
-                          borderColor: 'black',
-                          backgroundColor: '#FFFFDA',
-                        },
-                      }}
-                    >
-                      Logout
-                    </Button>
+                    <React.Fragment>
+                      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+                        <Tooltip title="Account settings">
+                          <IconButton
+                            onClick={handleClick}
+                            size="small"
+                            sx={{ ml: 2 }}
+                            aria-controls={open ? 'account-menu' : undefined}
+                            aria-haspopup="true"
+                            aria-expanded={open ? 'true' : undefined}
+                          >
+                            <Avatar sx={{ width: 35, height: 35 }}>{userData.name[0]}</Avatar>
+                          </IconButton>
+                        </Tooltip>
+                      </Box>
+                      <Menu
+                        anchorEl={anchorEl}
+                        id="account-menu"
+                        open={open}
+                        onClose={handleClose}
+                        onClick={handleClose}
+                        PaperProps={{
+                          elevation: 0,
+                          sx: {
+                            overflow: 'visible',
+                            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                            mt: 1.5,
+                            '& .MuiAvatar-root': {
+                              width: 32,
+                              height: 32,
+                              ml: -0.5,
+                              mr: 1,
+                            },
+                            '&::before': {
+                              content: '""',
+                              display: 'block',
+                              position: 'absolute',
+                              top: 0,
+                              right: 14,
+                              width: 10,
+                              height: 10,
+                              bgcolor: 'background.paper',
+                              transform: 'translateY(-50%) rotate(45deg)',
+                              zIndex: 0,
+                            },
+                          },
+                        }}
+                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                      >
+                        <MenuItem onClick={handleClose}>
+                          <Avatar /> Profile
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem onClick={handleClose}>
+                          <ListItemIcon>
+                            <Settings fontSize="small" />
+                          </ListItemIcon>
+                          Settings
+                        </MenuItem>
+                        <MenuItem onClick={handleLogout}>
+                          <ListItemIcon>
+                            <Logout fontSize="small" />
+                          </ListItemIcon>
+                          Logout
+                        </MenuItem>
+                      </Menu>
+                    </React.Fragment>
                   </li>
                 </>
               ) : (
                 <>
-                  <li>
+                  <li style={{ padding: "10px" }}>
                     <Button
                       variant='outlined'
                       onClick={() => {
                         setShowSignup(false);
                         setShowLogin(true);
                       }}
+                      style={{ margin: "0px" }}
                       sx={{
+                        fontSize: "8px",
+                        height: "25px",
                         border: '1px solid black',
                         color: 'black',
                         '&:hover': {
@@ -96,7 +205,7 @@ const Navbar = () => {
                       Login
                     </Button>
                   </li>
-                  <li>
+                  <li style={{ padding: "10px" }}>
                     <Button
                       variant='outlined'
                       onClick={() => {
@@ -104,6 +213,8 @@ const Navbar = () => {
                         setShowLogin(false);
                       }}
                       sx={{
+                        fontSize: "8px",
+                        height: "25px",
                         border: '1px solid black',
                         color: 'black',
                         '&:hover': {
@@ -169,23 +280,77 @@ const Navbar = () => {
               )}
             </ul>
             <ul className='second-nav'>
-              {currentUser && emailVerified ? (
+              {currentUser && emailVerified && userData ? (
                 <>
                   <li>
-                    <Button
-                      variant='outlined'
-                      onClick={handleLogout}
-                      sx={{
-                        border: '1px solid black',
-                        color: 'black',
-                        '&:hover': {
-                          borderColor: 'black',
-                          backgroundColor: '#FFFFDA',
-                        },
-                      }}
-                    >
-                      Logout
-                    </Button>
+                    <React.Fragment>
+                      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+                        <Tooltip title="Account settings">
+                          <IconButton
+                            onClick={handleClick}
+                            size="small"
+                            sx={{ ml: 2 }}
+                            aria-controls={open ? 'account-menu' : undefined}
+                            aria-haspopup="true"
+                            aria-expanded={open ? 'true' : undefined}
+                          >
+                            <Avatar sx={{ width: 50, height: 50 }}>{userData.name[0]}</Avatar>
+                          </IconButton>
+                        </Tooltip>
+                      </Box>
+                      <Menu
+                        anchorEl={anchorEl}
+                        id="account-menu"
+                        open={open}
+                        onClose={handleClose}
+                        onClick={handleClose}
+                        PaperProps={{
+                          elevation: 0,
+                          sx: {
+                            overflow: 'visible',
+                            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                            mt: 1.5,
+                            '& .MuiAvatar-root': {
+                              width: 32,
+                              height: 32,
+                              ml: -0.5,
+                              mr: 1,
+                            },
+                            '&::before': {
+                              content: '""',
+                              display: 'block',
+                              position: 'absolute',
+                              top: 0,
+                              right: 14,
+                              width: 10,
+                              height: 10,
+                              bgcolor: 'background.paper',
+                              transform: 'translateY(-50%) rotate(45deg)',
+                              zIndex: 0,
+                            },
+                          },
+                        }}
+                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                      >
+                        <MenuItem onClick={handleClose}>
+                          <Avatar /> Profile
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem onClick={handleClose}>
+                          <ListItemIcon>
+                            <Settings fontSize="small" />
+                          </ListItemIcon>
+                          Settings
+                        </MenuItem>
+                        <MenuItem onClick={handleLogout}>
+                          <ListItemIcon>
+                            <Logout fontSize="small" />
+                          </ListItemIcon>
+                          Logout
+                        </MenuItem>
+                      </Menu>
+                    </React.Fragment>
                   </li>
                 </>
               ) : (

@@ -114,9 +114,7 @@ const HomePage = () => {
 
   return (
     <div className="HomePage">
-      {flowers.map((flower: { src: string; top: string; left: string; }, index: Key | null | undefined) => (
-        <Flower key={index} src={flower.src} top={flower.top} left={flower.left} />
-      ))}
+      
       <div className="lateral-left"></div>
       <div className="content">
         <div style={{ textAlign: "center" }}>
