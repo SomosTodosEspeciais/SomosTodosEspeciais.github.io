@@ -12,7 +12,6 @@ import Signup from '../Signup/Signup';
 import { auth } from '../../Firebase/firebase';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import PersonIcon from '@mui/icons-material/Person';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 import Box from '@mui/material/Box';
@@ -20,9 +19,7 @@ import Avatar from '@mui/material/Avatar';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
@@ -162,14 +159,14 @@ const Navbar = () => {
                         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                       >
                         <MenuItem onClick={handleClose}>
-                          <Avatar /> Profile
+                          <Avatar /> Perfil
                         </MenuItem>
                         <Divider />
                         <MenuItem onClick={handleClose}>
                           <ListItemIcon>
                             <Settings fontSize="small" />
                           </ListItemIcon>
-                          Settings
+                          Definições
                         </MenuItem>
                         <MenuItem onClick={handleLogout}>
                           <ListItemIcon>
@@ -334,14 +331,14 @@ const Navbar = () => {
                         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                       >
                         <MenuItem onClick={handleClose}>
-                          <Avatar /> Profile
+                          <Avatar /> Perfil
                         </MenuItem>
                         <Divider />
                         <MenuItem onClick={handleClose}>
                           <ListItemIcon>
                             <Settings fontSize="small" />
                           </ListItemIcon>
-                          Settings
+                          Definições
                         </MenuItem>
                         <MenuItem onClick={handleLogout}>
                           <ListItemIcon>

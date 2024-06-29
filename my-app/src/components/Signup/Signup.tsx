@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, AuthError, sendEmailVerification } from 'firebase/auth';
 import { auth } from '../../Firebase/firebase';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import Button from '@mui/material/Button';
 import Close from './../../assets/close.png';
-
+import{verifyPassword, validateEmail,validateName,validatePassword} from '../../utils'
 import './Signup.css';
 
 interface SignupProps {
@@ -13,7 +12,6 @@ interface SignupProps {
 }
 
 const Signup: React.FC<SignupProps> = ({ onClose }) => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [sdPassword, setSdPassword] = useState<string>('');
@@ -22,12 +20,82 @@ const Signup: React.FC<SignupProps> = ({ onClose }) => {
 
   const db = getFirestore();
 
+
+  function hadleNameInput(name:string){
+    if(name.length <= 0){
+      return "\nO nome é um campo obrigatório"
+    }
+
+    if (!validateName(name)) {
+      return "\nO nome contém caracteres inválidos";
+    }
+
+    return ""
+  }
+
+  
+  function hadlePasswordInput(password:string,sdpassword:string){
+    if(password.length <= 0){
+      return "\nA palavra-passe é um campo obrigatório"
+    }
+    if(sdpassword.length <= 0){
+      return "\nA confirmação da palavra-passe é um campo obrigatório"
+    }
+
+    if (!validatePassword(password)) {
+      return "\nA palavra-passe deve ter mais de 6 caracteres e conter pelo menos um número ou símbolo";
+    }
+
+    if(!verifyPassword(password,sdpassword)){
+      return "\nAs palavras-passe não coincidem."
+    }
+    
+    return ""
+  }
+
+  function hadleEmailInput(email:string){
+    if(email.length <= 0){
+      return "\nO email é um campo obrigatório"
+    }
+
+    if(!validateEmail(email)){
+      return "\nEmail inválido"
+    }
+
+    return ""
+  }
+
+  function validateInput() {
+    let errosName:string
+    let errosPassword:string
+    let errosEmail:string
+    errosName = hadleNameInput(name)
+    errosEmail = hadleEmailInput(email)
+    errosPassword = hadlePasswordInput(password,sdPassword)
+
+    return errosName + errosEmail + errosPassword
+  }
+
+  function handleErros(error:string){
+    if(error === 'auth/email-already-in-use'){
+      return("O e-mail dado já esta em utilização")
+    }
+
+    return ""
+
+  }
+
+
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    let temp_message:string = ""
 
-    if (password !== sdPassword) {
-      setMessage('As senhas não coincidem.');
-      return;
+    temp_message = validateInput()
+
+    if(temp_message.length>0){
+      setMessage(temp_message)
+      return
     }
 
     try {
@@ -41,10 +109,10 @@ const Signup: React.FC<SignupProps> = ({ onClose }) => {
         role: 'user'
       });
 
-      // Enviar e-mail de verificação
+      
       await sendEmailVerification(user);
 
-      // Limpar os campos do formulário e exibir mensagem
+      
       setName('');
       setEmail('');
       setPassword('');
@@ -53,8 +121,9 @@ const Signup: React.FC<SignupProps> = ({ onClose }) => {
 
     } catch (error) {
       const authError = error as AuthError;
-      console.log(authError.code, authError.message);
-      setMessage('Erro ao criar a conta: ' + authError.message);
+     
+      setMessage(handleErros(authError.code))
+      
     }
   };
 
@@ -65,20 +134,20 @@ const Signup: React.FC<SignupProps> = ({ onClose }) => {
           <img src={Close} alt='' onClick={onClose} />
         </div>
         <label>
-          Nome:
-          <input value={name} onChange={(event) => setName(event.target.value)} type="text" name="name" required />
+          Nome*
+          <input value={name} onChange={(event) => setName(event.target.value)} type="text" name="name"  />
         </label>
         <label>
-          Email:
-          <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" name="email" required />
+          Email*
+          <input value={email} onChange={(event) => setEmail(event.target.value)} type="text" name="email"  />
         </label>
         <label>
-          Senha:
-          <input value={password} onChange={(event) => setPassword(event.target.value)} type="password" name="password" required />
+          Senha*
+          <input value={password} onChange={(event) => setPassword(event.target.value)} type="password" name="password"  />
         </label>
         <label>
-          Repetir Senha:
-          <input value={sdPassword} onChange={(event) => setSdPassword(event.target.value)} type="password" name="2password" required />
+          Repetir Senha*
+          <input value={sdPassword} onChange={(event) => setSdPassword(event.target.value)} type="password" name="2password"  />
         </label>
         <div className='error'>
           {message && <p>{message}</p>}

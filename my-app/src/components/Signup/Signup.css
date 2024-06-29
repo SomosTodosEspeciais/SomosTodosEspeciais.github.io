@@ -9,10 +9,12 @@
     align-items: center;
     z-index: 1000;
     background: none;
-    height: 450px;
-}
-
-.SignUp .signUp-form{
+    height: auto; /* Ajusta a altura automaticamente */
+    max-height: 90vh; /* Limite de altura para evitar que o modal saia da tela */
+    overflow-y: auto; /* Permite rolagem vertical se o conteúdo for muito grande */
+  }
+  
+  .SignUp .signUp-form {
     background-color: rgb(248, 248, 248);
     width: 100%;
     display: flex;
@@ -20,65 +22,51 @@
     justify-content: center;
     align-items: center;
     border-radius: 25px;
-    height: 100%;
-}
-
-.SignUp .signUp-form input{
+    padding: 20px;
+    box-sizing: border-box; /* Inclui padding no cálculo da largura total */
+  }
+  
+  .SignUp .signUp-form input {
     width: 97%;
     height: 40px;
-    
-}
-
-.SignUp .signUp-form label{
+  }
+  
+  .SignUp .signUp-form label {
     display: flex;
     flex-direction: column;
     padding-top: 20px;
     padding-left: 25px;
     text-align: left;
     width: 80%;
-    
-}
-
-.SignUp .error {
-    width: 65%;
-}
-
-
-.SignUp .error p{
-    margin: 0;
-    
-}
-
-.SignUp .modal-close {
-
-    position: absolute; 
-    top: 10px;
-    right: 10px; 
-    cursor: pointer;
-}
-
-.SignUp .modal-close img {
-    width: 30px; 
-    height: 30px; 
-}
-
-
-@media (max-width: 900px) {
-    .SignUp  {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 300px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        background: none;
-        height: 450px;
-    }
-
   }
-
-
-
+  
+  .SignUp .error {
+    width: 65%;
+    white-space: pre-line;
+    color: red;
+  }
+  
+  .SignUp .error p {
+    margin: 0;
+  }
+  
+  .SignUp .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  .SignUp .modal-close img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  @media (max-width: 900px) {
+    .SignUp {
+      width: 300px;
+      max-height: 90vh; /* Limite de altura para dispositivos móveis */
+      overflow-y: auto; /* Permite rolagem vertical se o conteúdo for muito grande */
+    }
+  }
+  

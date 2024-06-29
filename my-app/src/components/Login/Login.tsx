@@ -21,6 +21,14 @@ const Login: React.FC<LoginProps> = ({ onClose }) => {
 
   const db = getFirestore();
 
+  function handleError(error:string){
+    if(error === "auth/invalid-credential"){
+      return "Email ou Palavra-Pass incorretos, tente novamente"
+    }
+    return ""
+  }
+
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage(''); // Limpa mensagens anteriores
@@ -54,7 +62,7 @@ const Login: React.FC<LoginProps> = ({ onClose }) => {
     } catch (error) {
       const authError = error as AuthError;
       console.log(authError.code, authError.message);
-      setMessage('Erro ao fazer login: ' + authError.message);
+      setMessage(handleError(authError.code));
     }
   };
 
