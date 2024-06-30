@@ -7,87 +7,78 @@ import Pagination from '@mui/material/Pagination';
 import { useMediaQuery } from '@mui/material';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from '../../Firebase/firebase';
+import { getDownloadURL, ref, getStorage, listAll } from "firebase/storage";
 
-const images = [
-    { url: require('../../assets/extra-revista-1.jpeg') },
-    { url: require('../../assets/extra-revista-2.jpeg') },
-    { url: require('../../assets/extra-revista-3.mp4') },
-    { url: require('../../assets/extra-revista-4.mp4') },
-];
-
-const images2 = [
-    { url: require('../../assets/extra-feira-1.mp4') },
-    { url: require('../../assets/extra-feira-2.mp4') },
-    { url: require('../../assets/extra-feira-3-fixed.mp4') },
-    { url: require('../../assets/extra-feira-4.mp4') },
-    { url: require('../../assets/extra-feira-5.jpeg') },
-    { url: require('../../assets/extra-feira-6.mp4') },
-];
-
-const images3 = [
-    { url: require('../../assets/extra-live-1.jpeg') },
-];
-
-const images4 = [
-    { url: require('../../assets/extra-jogo-1.mp4') },
-    { url: require('../../assets/extra-jogo-2.mp4') },
-    { url: require('../../assets/extra-jogo-3.mp4') },
-];
-
-const images5 = [
-    { url: require('../../assets/extra-praia-1.mp4') },
-    { url: require('../../assets/extra-praia-2.mp4') },
-];
-
-const images6 = [
-    { url: require('../../assets/extra-reuniao-1.mp4') },
-    { url: require('../../assets/extra-reuniao-2.mp4') },
-];
-
-const images7 = [
-    { url: require('../../assets/extra-estilo-1.mp4') },
-];
-
-const descricaoLimpeza = '';
-const descricaoGatil = '';
-const descricaoRevista = '';
-
-const atividades = [
-    { titulo: "Juntos Pela Limpeza de Esposende", imagens: images5, descricao: descricaoLimpeza },
-    { titulo: "Encerramento da Semana Incluir + 2023 na Biblioteca Lúcio Craveiro da Silva", imagens: images, descricao: descricaoGatil },
-    { titulo: "Live com o Sr. Braga do 'Inclusão e Acessibilidade Para Todos'", imagens: images3, descricao: descricaoRevista },
-    { titulo: "Desenvolvimento do Jogo no Scratch", imagens: images4, descricao: descricaoRevista },
-    { titulo: "Mercadinho de Primavera", imagens: images2, descricao: descricaoRevista },
-    { titulo: "Reunião do Todos Somos Especiais", imagens: images6, descricao: descricaoRevista },
-    { titulo: "Estilo Todos Somos Especiais", imagens: images7, descricao: "" },
-];
+interface Extra {
+    titulo: string;
+    imagens: { url: string, type: 'image' | 'video' }[];
+    descricao: string;
+    pasta: string;
+}
 
 
 const Extras = () => {
+
+    const [extra, setAtividades] = useState<Extra[]>([]);
+    const [paginasTotal, setPaginasTotal] = useState<number>(1);
+    const [pageIndex, setPageIndex] = useState<number>(1);
+    const [showExtra, setShowExtra] = useState<Extra[]>([]);
+    const atividadesPorPagina = 2;
 
     useEffect(() => {
         AOS.init({
             once: false, // Permitir animações repetidas ao subir na página
         });
+        const fetchExtra = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, "atividades"));
+                const atividadesData = querySnapshot.docs.map(doc => doc.data() as Extra);
+
+                const atividadesComImagens = await Promise.all(atividadesData.map(async (atividade) => {
+                    const pasta = atividade.pasta;
+
+                    const getFolderFiles = async (folderPath: string): Promise<{ url: string, type: 'image' | 'video' }[]> => {
+                        const storage = getStorage();
+                        const folderRef = ref(storage, folderPath);
+                        const filesList = await listAll(folderRef);
+                        const urls = await Promise.all(filesList.items.map(async (item) => {
+                            const imageUrl = await getDownloadURL(item);
+                            const extension = imageUrl.split('.').pop()?.toLowerCase();
+                            const type: 'image' | 'video' = (extension === 'mp4') ? 'video' : 'image'; // Explicitly type as 'image' | 'video'
+                            return { url: imageUrl, type };
+                        }));
+                        return urls;
+                    };
+                    
+
+                    const imageUrls = await getFolderFiles(pasta);
+
+                    return {
+                        ...atividade,
+                        imagens: imageUrls
+                    };
+                }));
+
+                setAtividades(atividadesComImagens);
+                setShowExtra(atividadesComImagens.slice(0, atividadesPorPagina));
+                setPaginasTotal(Math.ceil(atividadesComImagens.length / atividadesPorPagina));
+            } catch (error) {
+                
+            }
+        };
+
+        fetchExtra();
     }, []);
 
 
-    const atividadesPorPagina = 2;
-    const paginasTotal = Math.ceil(atividades.length / atividadesPorPagina);
-    const [pageIndex, setPageIndex] = useState<number>(1);
 
-    const [showExtras, setShowExtras] = useState<{
-        titulo: string;
-        imagens: {
-            url: any;
-        }[];
-        descricao: string;
-    }[]>(JSON.parse(JSON.stringify(atividades.slice(0, atividadesPorPagina))));
 
     useEffect(() => {
         const startIndex = (pageIndex - 1) * atividadesPorPagina;
         const endIndex = startIndex + atividadesPorPagina;
-        setShowExtras(JSON.parse(JSON.stringify(atividades.slice(startIndex, endIndex))));
+        setShowExtra(JSON.parse(JSON.stringify(extra.slice(startIndex, endIndex))));
     }, [pageIndex]);
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -107,7 +98,7 @@ const Extras = () => {
                 <p>Bem vindos aos nossos "bastidores". Um espaço mais informal mas exposto por ser fundamental no, e para, o grupo. Aqui encontrarão a fase de preparação das diversas atividades, assim como momentos de diversão e descontração decorrentes das respetivas ações. Afinal, Todos Somos Especiais é um grupo jovem caracterizado pela sua boa disposição, naturalidade e união, sendo estes alguns dos momentos que o exprimem. ❤️</p>
 
             </div>
-            {showExtras.map(({ titulo, imagens, descricao }, index) => (
+            {showExtra.map(({ titulo, imagens, descricao }, index) => (
                 <div key={`${pageIndex}-${index}`}>
                     <CarouselProvider
                         key={`${titulo}-${index}`}

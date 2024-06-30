@@ -9,6 +9,7 @@ import { VideoPlayer } from "@graphland/react-video-player";
 
 interface Slide2 {
     url: string;
+    type: 'image' | 'video';
 }
 
 interface SlideImagesProps {
@@ -40,29 +41,23 @@ const SlideImages: React.FC<SlideImagesProps> = ({ images, titulo, descricao }) 
         };
     }, [windowWidth]);
 
-
-
-    const renderMedia = (url: string, index: number) => {
-
-        const extension = url.split(".").pop()?.toLowerCase();
-        if (extension === "jpg" || extension === "jpeg" || extension === "png" || extension === "gif") {
+    const renderMedia = (url: string, type: 'image' | 'video', index: number) => {
+        if (type === 'image') {
             return (
-                <div className="media-container">
+                <div className="media-container" key={index}>
                     <img src={url} alt="" className="media-content" />
                 </div>
             );
-        } else if (extension === "mp4") {
+        } else if (type === 'video') {
             return (
-                <div className="media-container">
+                <div className="media-container" key={index}>
                     <VideoPlayer
-                    
-                        height={isSmallScreen? 300 :610}
+                        height={isSmallScreen ? 300 : 610}
                         isFluid
                         playbackRates={[0.5, 1, 1.5, 2]}
                         sources={[{ src: url, type: 'video/mp4' }]}
                         theme="fantasy"
                         width={310}
-                        
                     />
                 </div>
             );
@@ -79,15 +74,17 @@ const SlideImages: React.FC<SlideImagesProps> = ({ images, titulo, descricao }) 
                 </Typography>
             </div>
             <div style={{ position: 'relative', width: `${imageSize}px`, height: `${imageSize}px`, marginTop: "10px" }}>
-                <Slider className={"slider"}>
-                    {images.map((slide, index) => (
-                        <Slide index={index} key={index}>
-                            <div className="slide-content">
-                                {renderMedia(slide.url, index)}
-                            </div>
-                        </Slide>
-                    ))}
-                </Slider>
+                {images && images.length > 0 && (
+                    <Slider className={"slider"}>
+                        {images.map((slide, index) => (
+                            <Slide index={index} key={index}>
+                                <div className="slide-content">
+                                    {renderMedia(slide.url, slide.type, index)}
+                                </div>
+                            </Slide>
+                        ))}
+                    </Slider>
+                )}
                 <ButtonBack style={{ ...arrowButtonStyle, left: 0 }}>
                     <ArrowBackIosIcon />
                 </ButtonBack>
