@@ -16,6 +16,7 @@ import CookieConsent from "react-cookie-consent";
 import { AuthProvider } from './context/AuthContext/AuthContext';
 import AdminView from './pages/AdminView/AdminView';
 import { ProtectedRoute } from './ProtectedRoute/ProtectedRoute';
+import Profile from './pages/Profile/Profile';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
               <Route path='/mascote' element={<Mascote />} />
               <Route path='/revista' element={<Revista />} />
               <Route path='/extras' element={<Extras />} />
+              <Route path='/perfil' element={<Profile />} />
               <Route path='/politica-privacidade' element={<Privacidade />} />
               <Route path='/termos-e-condicoes' element={<TermosCondicoes />} />
               <Route path='/historia' element={<History />} />

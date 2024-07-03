@@ -13,6 +13,7 @@ import { auth } from '../../Firebase/firebase';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -27,7 +28,7 @@ const Navbar = () => {
   const { isAdmin, emailVerified, currentUser } = useAuth();
   const [showLogin, setShowLogin] = useState<boolean>(false);
   const [showSignup, setShowSignup] = useState<boolean>(false);
-
+  const navigate = useNavigate()
   const isSmallScreen = useMediaQuery('(max-width: 900px)');
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -78,15 +79,17 @@ const Navbar = () => {
 
   // Itens do menu
   const menuItems = [
+    { nome: 'Página Inicial', link: '/' },
+    { nome: 'História', link: '/historia' },
+    { nome: 'Constituição', link: '/constituicao' },
     { nome: 'Atividades', link: '/atividades' },
     { nome: 'Jogos', link: '/jogos' },
     { nome: 'Revista', link: '/revista' },
-    { nome: 'Página Inicial', link: '/' },
-    { nome: 'Constituição', link: '/constituicao' },
-    { nome: 'Contacto', link: '/contacto' },
+    
     { nome: 'Mascote', link: '/mascote' },
     { nome: 'Bastidores', link: '/extras' },
-    { nome: 'História', link: '/historia' },
+    { nome: 'Contacto', link: '/contacto' },
+    
   ];
 
   return (
@@ -158,7 +161,7 @@ const Navbar = () => {
                         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                       >
-                        <MenuItem onClick={handleClose}>
+                        <MenuItem onClick={()=>navigate('/perfil')}>
                           <Avatar /> Perfil
                         </MenuItem>
                         <Divider />
@@ -249,9 +252,9 @@ const Navbar = () => {
                 <Link className='button-nav-icon' to={'/constituicao'}>
                   Constituição
                 </Link>
-              </li>
+              </li>  
               <li>
-                <MenuDropdown itens={[menuItems[0], menuItems[1], menuItems[2]]} titulo={'Dinâmica'} />
+                <MenuDropdown itens={[menuItems[3], menuItems[4], menuItems[5]]} titulo={'Dinâmica'} />
               </li>
               <li>
                 <Link className='button-nav-icon' to={'/mascote'}>
@@ -330,7 +333,7 @@ const Navbar = () => {
                         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                       >
-                        <MenuItem onClick={handleClose}>
+                        <MenuItem onClick={()=>navigate('/perfil')}>
                           <Avatar /> Perfil
                         </MenuItem>
                         <Divider />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SlideImage from '../../components/SlideImages/SlideImages';
 import '../../components/SlideImages/SlideImages.css';
-import './Extras.css';
+import './EditExtras.css';
 import { CarouselProvider } from "pure-react-carousel";
 import Pagination from '@mui/material/Pagination';
 import { useMediaQuery } from '@mui/material';
@@ -19,18 +19,13 @@ interface Extra {
 }
 
 
-const Extras = () => {
+const EditExtras = () => {
 
     const [extra, setAtividades] = useState<Extra[]>([]);
-    const [paginasTotal, setPaginasTotal] = useState<number>(1);
-    const [pageIndex, setPageIndex] = useState<number>(1);
-    const [showExtra, setShowExtra] = useState<Extra[]>([]);
-    const atividadesPorPagina = 2;
+
 
     useEffect(() => {
-        AOS.init({
-            once: false, // Permitir animações repetidas ao subir na página
-        });
+
         const fetchExtra = async () => {
             try {
                 const querySnapshot = await getDocs(collection(db, "bastidor"));
@@ -72,8 +67,7 @@ const Extras = () => {
                 }));
 
                 setAtividades(extrasComImagens);
-                setShowExtra(extrasComImagens.slice(0, atividadesPorPagina));
-                setPaginasTotal(Math.ceil(extrasComImagens.length / atividadesPorPagina));
+
             } catch (error) {
 
             }
@@ -83,33 +77,15 @@ const Extras = () => {
     }, []);
 
 
-
-
-    useEffect(() => {
-        const startIndex = (pageIndex - 1) * atividadesPorPagina;
-        const endIndex = startIndex + atividadesPorPagina;
-        setShowExtra(JSON.parse(JSON.stringify(extra.slice(startIndex, endIndex))));
-    }, [pageIndex]);
-
-    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        setPageIndex(value);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
     const isSmallScreen = useMediaQuery('(max-width: 900px)');
 
 
     return (
-        <div className='Extras'>
-            <div className='header'>
-                <h1>Bastidores</h1>
-            </div>
-            <div className="content">
-                <p>Bem vindos aos nossos "bastidores". Um espaço mais informal mas exposto por ser fundamental no, e para, o grupo. Aqui encontrarão a fase de preparação das diversas atividades, assim como momentos de diversão e descontração decorrentes das respetivas ações. Afinal, Todos Somos Especiais é um grupo jovem caracterizado pela sua boa disposição, naturalidade e união, sendo estes alguns dos momentos que o exprimem. ❤️</p>
+        <div className='EditExtras'>
 
-            </div>
-            {showExtra.map(({ titulo, imagens, descricao }, index) => (
-                <div key={`${pageIndex}-${index}`}>
+
+            {extra.map(({ titulo, imagens, descricao }, index) => (
+                <div key={`${index}`}>
                     <CarouselProvider
                         key={`${titulo}-${index}`}
                         visibleSlides={1}
@@ -123,11 +99,7 @@ const Extras = () => {
                     </CarouselProvider>
                 </div>
             ))}
-            {paginasTotal > 1 && (
-                <div style={{ display: 'flex', justifyContent: 'center', paddingBottom: '10px', paddingTop: '10px' }}>
-                    <Pagination count={paginasTotal} page={pageIndex} onChange={handleChange} size="large" />
-                </div>
-            )}
+
             <div className='citation' data-aos={isSmallScreen ? "fade-up" : "fade-right"}>
                 <div className='content2'>
                     <p><q>As coisas mais belas são ditadas pela loucra e escritas pela razão</q></p>
@@ -138,4 +110,4 @@ const Extras = () => {
     );
 };
 
-export default Extras;
+export default EditExtras;

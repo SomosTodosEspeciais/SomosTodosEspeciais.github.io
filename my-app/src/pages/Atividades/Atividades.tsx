@@ -36,13 +36,24 @@ const Atividades = () => {
                         const filesList = await listAll(folderRef);
                         const urls = await Promise.all(filesList.items.map(async (item) => {
                             const imageUrl = await getDownloadURL(item);
-                            const extension = imageUrl.split('.').pop()?.toLowerCase();
-                            const type: 'image' | 'video' = (extension === 'mp4') ? 'video' : 'image'; // Explicitly type as 'image' | 'video'
+                            const regex = /[^/]+(?=\?alt=media)/;
+                            const match = imageUrl.match(regex);
+                            let type: 'image' | 'video' = 'image'; // Default to 'image'
+
+                            if (match) {
+                                const fileName = match[0];
+                                const extension = fileName.split('.').pop()?.toLowerCase();
+                                if (extension === 'mp4') {
+                                    type = 'video';
+                                }
+                            }
+
                             return { url: imageUrl, type };
                         }));
                         return urls;
+
                     };
-                    
+
 
                     const imageUrls = await getFolderFiles(pasta);
 
@@ -51,7 +62,7 @@ const Atividades = () => {
                         imagens: imageUrls
                     };
                 }));
-
+                console.log(atividadesComImagens)
                 setAtividades(atividadesComImagens);
                 setShowAtividades(atividadesComImagens.slice(0, atividadesPorPagina));
                 setPaginasTotal(Math.ceil(atividadesComImagens.length / atividadesPorPagina));
