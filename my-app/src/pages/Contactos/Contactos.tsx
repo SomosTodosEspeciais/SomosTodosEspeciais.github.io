@@ -11,7 +11,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { SERVICE_ID, TEMPLATE_ID, PUBLICKEY } from '../../var'
+import { SERVICE_ID, TEMPLATE_ID, PUBLICKEY } from '../../vars2'
 import Close from '../../assets/close.png'
 import { SnackbarKey, SnackbarProvider, closeSnackbar, enqueueSnackbar } from 'notistack';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
