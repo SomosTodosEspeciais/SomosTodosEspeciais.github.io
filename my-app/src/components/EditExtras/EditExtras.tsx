@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import SlideImage from '../../components/SlideImages/SlideImages';
 import '../../components/SlideImages/SlideImages.css';
 import './EditExtras.css';
-import { CarouselProvider } from "pure-react-carousel";
-import Pagination from '@mui/material/Pagination';
-import { useMediaQuery, Button } from '@mui/material';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import { useMediaQuery, Button, Typography } from '@mui/material';
 import { db } from '../../Firebase/firebase';
 import { getDownloadURL, ref, getStorage, listAll } from "firebase/storage";
 import MediaGrid from "../MediaGrid/MediaGrid";
-import { collection, getDocs, updateDoc, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, updateDoc, doc, getDoc, addDoc } from "firebase/firestore";
+import Close from './../../assets/close.png';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { deleteDoc } from 'firebase/firestore';
+import ModalExtra from "../ModalExtras/ModalExtras";
+import BasicTextFieldOutline from "../BasicTextFieldOutline/BasicTextFieldOutline";
+import VideoProcessor from "../VideoProcessor/VideoProcessor";
+import { SnackbarKey, SnackbarProvider, closeSnackbar, enqueueSnackbar } from 'notistack';
+import ModalConfirm from "../ModalConfirm/ModalConfirm";
 
 interface Extra {
     id: string;
@@ -39,6 +42,10 @@ const EditExtras = () => {
     });
     const [tema, setTema] = useState<string>("");
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
+    const [openModal, setOpenModal] = useState<boolean>(false);
+    const [openModal2, setOpenModal2] = useState<boolean>(false);
+    const [newFolder, setNewFolder] = useState<string>("");
+    const [newExtra, setNewExtra] = useState<string>("");
 
     function extractFileNameFromUrl1(url: string): string | null {
         if (!url) return null;
@@ -54,7 +61,11 @@ const EditExtras = () => {
         return match && match[1] ? match[1] : null;
     }
 
-
+    const actionErrorInfo = (snackbarId: SnackbarKey | undefined) => (
+        <>
+            <img src={Close} alt='' className='close-image' onClick={() => { closeSnackbar(snackbarId) }}></img>
+        </>
+    );
     useEffect(() => {
         const fetchExtra = async () => {
             try {
@@ -72,40 +83,57 @@ const EditExtras = () => {
 
                     const imagensObjetos: string[] = extra_tmp.imagens;
 
-                    const getFolderFiles = async (folderPath: string): Promise<{ url: string; type: 'image' | 'video'; url_original: string }[]> => {
+                    const getFolderFiles = async (folderPath: string, imagensObjetos: string[]): Promise<{ url: string; type: 'image' | 'video'; url_original: string }[]> => {
                         const storage = getStorage();
                         const folderRef = ref(storage, folderPath);
-                        const filesList = await listAll(folderRef);
-                        const urls = await Promise.all(filesList.items.map(async (item) => {
-                            const imageUrl = await getDownloadURL(item);
-                            const regex = /[^/]+(?=\?alt=media)/;
-                            const match = imageUrl.match(regex);
-                            let type: 'image' | 'video' = 'image';
-                            let originalUrl: string = "";
 
-                            if (match) {
-                                const fileName = match[0];
-                                const extension = fileName.split('.').pop()?.toLowerCase();
-                                if (extension === 'mp4') {
-                                    type = 'video';
-                                }
-                                for (let i = 0; i < imagensObjetos.length; i++) {
-                                    const img_tmp = imagensObjetos[i];
+                        try {
+                            // Listar todos os itens na pasta do Storage
+                            const filesList = await listAll(folderRef);
 
+                            // Filtrar apenas as imagens que estão na lista do Firestore
+                            const filteredFiles = filesList.items.filter(item => {
+                                const fileName = item.name;
+                                return imagensObjetos.some(img => {
+                                    return extractFileNameFromUrl1(img) === fileName
+                                });
+                            });
 
-                                    if (extractFileNameFromUrl1(img_tmp) === extractFileNameFromUrl(fileName)) {
-                                        originalUrl = img_tmp;
-                                        break;
+                            // Obter os URLs para os arquivos filtrados
+                            const urls = await Promise.all(filteredFiles.map(async (item) => {
+                                const imageUrl = await getDownloadURL(item);
+                                const regex = /[^/]+(?=\?alt=media)/;
+                                const match = imageUrl.match(regex);
+                                let type: 'image' | 'video' = 'image';
+                                let originalUrl: string = "";
+
+                                if (match) {
+                                    const fileName = match[0];
+                                    const extension = fileName.split('.').pop()?.toLowerCase();
+                                    if (extension === 'mp4') {
+                                        type = 'video';
+                                    }
+                                    // Encontrar o URL original correspondente no Firestore
+                                    for (let i = 0; i < imagensObjetos.length; i++) {
+                                        const img_tmp = imagensObjetos[i];
+                                        if (extractFileNameFromUrl1(img_tmp) === extractFileNameFromUrl(fileName)) {
+                                            originalUrl = img_tmp;
+                                            break;
+                                        }
                                     }
                                 }
-                            }
 
-                            return { url: imageUrl, type: type, url_original: originalUrl };
-                        }));
-                        return urls;
+                                return { url: imageUrl, type: type, url_original: originalUrl };
+                            }));
+
+                            return urls;
+                        } catch (error) {
+                            console.error("Error listing files or fetching URLs:", error);
+                            return [];
+                        }
                     };
 
-                    const imageUrls = await getFolderFiles(pasta);
+                    const imageUrls = await getFolderFiles(pasta, imagensObjetos);
 
                     return {
                         id: extra_tmp.id,
@@ -127,25 +155,25 @@ const EditExtras = () => {
 
     const handleRemoveItems = async () => {
         try {
-            console.log(selectExtra)
+
             const docRef = doc(db, "bastidor", selectExtra.id);
             const docSnapshot = await getDoc(docRef);
             const docData = docSnapshot.data();
 
             if (docSnapshot.exists() && docData && Array.isArray(docData.imagens)) {
-                console.log(selectedItems)
+
                 const newImagens = selectExtra.imagens.filter(imagem => !selectedItems.includes(imagem.url_original));
-                console.log(newImagens)
+
 
                 setSelectedExtra(prevState => ({
                     ...prevState,
                     imagens: newImagens,
                 }));
 
-                // Atualiza o documento no Firestore
-                await updateDoc(docRef, { imagens: newImagens });
+                const urlsOriginais = newImagens.map(imagem => imagem.url_original);
 
-                // Atualiza o estado local para refletir a remoção
+                await updateDoc(docRef, { imagens: urlsOriginais });
+
                 setExtra(prevExtra =>
                     prevExtra.map(ex =>
                         ex.id === selectExtra.id
@@ -154,7 +182,6 @@ const EditExtras = () => {
                     )
                 );
 
-                // Reseta o selectedItems
                 setSelectedItems([]);
             } else {
                 console.error("Document does not exist or data is undefined: ", selectExtra.id);
@@ -164,59 +191,269 @@ const EditExtras = () => {
         }
     };
 
+    const handleRemoveTema = async () => {
+        try {
+            const id = selectExtra.id
+            // Obtém a referência do documento no Firestore
+            const docRef = doc(db, 'bastidor', id);
+
+            // Remove o documento do Firestore
+            await deleteDoc(docRef);
+
+            console.log(`Tema com ID ${id} removido com sucesso do Firestore.`);
+
+            // Atualiza o estado local removendo o tema da lista extra
+            setExtra(prevExtra => prevExtra.filter(item => item.id !== id));
+            setOpenModal2(false)
+        } catch (error) {
+            console.error("Erro ao remover tema:", error);
+            // Tratar erros de forma apropriada, dependendo do seu aplicativo
+        }
+    };
+
+    const handleAddTema = async () => {
+        const pastas = extra.map(e => e.pasta);
+        if (pastas.includes("Bastidores/" + newFolder)) {
+            enqueueSnackbar(
+                <Typography
+                    fontFamily={"Open Sans Variable"}
+                    fontWeight={400}
+                    fontSize={"14px"}
+                    lineHeight={"20.02px"}
+                >
+                    A pasta {newFolder} já esta em utilização, utiliza outra!
+                </Typography>
+                , {
+                    action: actionErrorInfo,
+                    variant: 'error',
+                    autoHideDuration: 10000
+                });
+            setNewFolder("")
+            return
+        }
+
+        if (newFolder == "" || newExtra == "") {
+
+            enqueueSnackbar(
+                <Typography
+                    fontFamily={"Open Sans Variable"}
+                    fontWeight={400}
+                    fontSize={"14px"}
+                    lineHeight={"20.02px"}
+                >
+                    É necessário ter Titulo como Pasta
+                </Typography>
+                , {
+                    action: actionErrorInfo,
+                    variant: 'error',
+                    autoHideDuration: 10000
+                });
+            setNewFolder("")
+            return
+
+        }
+
+        try {
+            const docRef = await addDoc(collection(db, 'bastidor'), {
+                titulo: newExtra,
+                imagens: [],
+                pasta: "Bastidores/" + newFolder,
+                descricao: ""
+            });
+
+            const newDoc = await getDoc(docRef);
+            const newDocData = newDoc.data();
+
+            if (!newDocData) {
+                throw new Error("Erro ao obter os dados do novo documento");
+            }
+
+            const newTema: Extra = {
+                id: newDoc.id,
+                titulo: newDocData.titulo,
+                imagens: [],
+                descricao: newDocData.descricao,
+                pasta: newDocData.pasta,
+            };
+
+            setExtra([...extra, newTema]);
+
+            closeModal();
+            setNewExtra("");
+            setNewFolder("");
+            setSelectedExtra(newTema)
+            setTema(newExtra)
+        } catch (error: any) {
+            console.error("Erro ao adicionar documento:", error);
+            throw error;
+        }
+    };
+
+    const addImageUrlToExtra = async (extraId: string, downloadURL: string, urlOriginal: string) => {
+
+        try {
+
+            const urlsOriginais = selectExtra.imagens.map(imagem => imagem.url_original);
+            const newImagens = [...urlsOriginais, urlOriginal];
+
+            const docRef = doc(db, "bastidor", selectExtra.id);
+
+            await updateDoc(docRef, { imagens: newImagens });
+
+            const regex = /[^/]+(?=\?alt=media)/;
+            const match = downloadURL.match(regex);
+            let type: 'image' | 'video' = 'image';
+
+            if (match) {
+                const fileName = match[0];
+                const extension = fileName.split('.').pop()?.toLowerCase();
+                if (extension === 'mp4') {
+                    type = 'video';
+                }
+
+                let tmp_url: { url: string; type: 'image' | 'video'; url_original: string } = {
+                    url: downloadURL,
+                    type: type,
+                    url_original: urlOriginal,
+                };
+
+                setSelectedExtra(prevState => ({
+                    ...prevState,
+                    imagens: [...prevState.imagens, tmp_url],
+                }));
+
+                setExtra(prevExtra =>
+                    prevExtra.map(ex =>
+                        ex.id === selectExtra.id
+                            ? { ...ex, imagens: [...ex.imagens, tmp_url] }
+                            : ex
+                    )
+                );
+            }
+
+
+
+        } catch (error) {
+            console.error("Erro ao adicionar URL ao documento:", error);
+        }
+    };
+
+
+
+
+    const closeModal = () => {
+        setOpenModal(false);
+        setOpenModal2(false);
+    };
 
     const isSmallScreen = useMediaQuery('(max-width: 900px)');
 
     return (
         <div className='EditExtras'>
-            <div className="temas">
-                {extra.map(({ titulo }, index) => (
-                    <div className={"tema " + (titulo === tema ? " selected" : " ")} onClick={() => {
-                        setTema(titulo)
-                        setSelectedExtra(extra[index])
-                    }
-                    }
-                        key={`${index}`}>
-                        <p>{titulo}</p>
+            <SnackbarProvider classes={{ root: 'snackbarMaxWidth' }} maxSnack={4} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant='info' autoHideDuration={null} hideIconVariant={true} >
+
+                <div className="top-temas">
+                    <div className="temas">
+                        {extra.map(({ titulo, id }, index) => (
+                            <div
+                                className={"tema " + (titulo === tema ? " selected" : " ")}
+                                onClick={() => {
+                                    setTema(titulo);
+                                    setSelectedExtra(extra[index]);
+                                }}
+                                key={id}
+                            >
+                                <p>{titulo}</p>
+                                <img src={Close} alt="" onClick={() => setOpenModal2(true)} />
+                            </div>
+                        ))}
                     </div>
+
+                    <div className="add-tema">
+                        <AddCircleIcon sx={{ fontSize: "70px", marginLeft: "25px", cursor: "pointer" }} onClick={() => setOpenModal(true)}></AddCircleIcon>
+
+
+                    </div>
+                </div>
+
+                {extra.map((item, index) => (
+                    item.titulo === tema && (
+                        <React.Fragment key={`extra-${index}`}>
+                            <div className="remove">
+                                <VideoProcessor
+                                    extra={item}
+                                    addImageUrl={(downloadURL, urlOriginal) => addImageUrlToExtra(item.id, downloadURL, urlOriginal)}
+                                />
+                            </div>
+                            <div className="imagesGrid">
+                                <MediaGrid
+                                    selectedItems={selectedItems}
+                                    setSelectedItems={setSelectedItems}
+                                    mediaItems={item.imagens}
+                                    titulo={item.titulo}
+                                    descricao={item.descricao}
+                                />
+                            </div>
+                        </React.Fragment>
+                    )
                 ))}
-            </div>
 
-            {extra.map(({ titulo, imagens, descricao }, index) => (
-                titulo === tema &&
-                <div key={`${index}`} className="imagesGrid">
-                    <MediaGrid
-                        selectedItems={selectedItems}
-                        setSelectedItems={setSelectedItems}
-                        mediaItems={imagens}
-                        titulo={titulo}
-                        descricao={descricao}
-                    />
-                </div>
-            ))}
-            {selectedItems.length > 0 &&
-                <div className="remove">
-                    <Button variant="contained" color="secondary" onClick={handleRemoveItems}>
-                        Remover Selecionados
-                    </Button>
 
-                </div>
-            }
-            {selectedItems.length === 0 && selectExtra.titulo != "" &&
-                <div className="remove">
-                    
-                    Seleciona Imagens
+                {selectedItems.length > 0 &&
+                    <div className="remove">
+                        <Button variant="contained" color="secondary" onClick={handleRemoveItems}>
+                            Remover Selecionados
+                        </Button>
 
-                </div>
-            }
+                    </div>
+                }
+                {tema == "" &&
+                    <div className="remove">
 
-            {selectedItems.length === 0 && selectExtra.titulo === "" &&
-                <div className="remove">
-                    Seleciona um tema
-                </div>
-            }
+                        Seleciona um Tema
 
+                    </div>
+                }
+
+
+                {openModal &&
+
+                    <ModalExtra
+
+                        showButtons={false}
+                        onClose={closeModal}
+                        addTema={handleAddTema}
+                        titulo={""}
+                        height={""}>
+                        <div style={{ display: "flex", flexDirection: "row", gap: "16px" }}>
+                            <BasicTextFieldOutline label={"Titulo do Bastidor"} value={newExtra} set={setNewExtra}></BasicTextFieldOutline>
+
+                            <BasicTextFieldOutline label={"Pasta para as Imagens"} value={newFolder} set={setNewFolder}></BasicTextFieldOutline>
+                            <p>Nota:Na pasta coloquem apenas uma palavra</p>
+                        </div>
+
+                    </ModalExtra>
+                }
+
+                {openModal2 &&
+
+                    <ModalConfirm
+
+                        showButtons={false}
+                        onClose={closeModal}
+                        deleteTema={handleRemoveTema}
+                        titulo={""}
+                        height={""}>
+                        <div style={{ display: "flex", flexDirection: "row", gap: "16px" }}>
+                            
+                            <p>Vais querer realmente apagar o Bastidor <strong>{selectExtra.titulo}</strong> </p>
+                        </div>
+
+                    </ModalConfirm>
+                }
+            </SnackbarProvider>
         </div>
+
     );
 };
 
