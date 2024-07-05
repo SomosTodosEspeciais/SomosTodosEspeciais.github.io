@@ -18,7 +18,7 @@ interface ModalConfirmProps {
 const ModalConfirm: React.FC<ModalConfirmProps> = ({ onClose, deleteTema, titulo, height, buttonDisable, children }) => {
 
     return (
-        <div className={`modal-escala-vigor`}>
+        <div className={`modal-confirm`}>
             <div className="modal-overlay" style={{ height: height }} onClick={onClose}>
                 <div className="modal-content-aux" style={{ height: height }} onClick={(e) => e.stopPropagation()}>
                     <div className="modal-title">

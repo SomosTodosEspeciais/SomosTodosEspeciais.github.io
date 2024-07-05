@@ -18,7 +18,7 @@ interface ModalExtrasProps {
 const ModalExtras: React.FC<ModalExtrasProps> = ({ onClose,addTema, titulo, height, buttonDisable, children }) => {
 
     return (
-        <div className={`modal-escala-vigor`}>
+        <div className={`modal-extra`}>
             <div className="modal-overlay" style={{ height: height }} onClick={onClose}>
                 <div className="modal-content-aux" style={{ height: height }} onClick={(e) => e.stopPropagation()}>
                     <div className="modal-title">

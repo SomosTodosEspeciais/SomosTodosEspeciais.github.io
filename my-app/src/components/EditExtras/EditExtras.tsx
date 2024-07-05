@@ -425,10 +425,14 @@ const EditExtras = () => {
                         addTema={handleAddTema}
                         titulo={""}
                         height={""}>
-                        <div style={{ display: "flex", flexDirection: "row", gap: "16px" }}>
-                            <BasicTextFieldOutline label={"Titulo do Bastidor"} value={newExtra} set={setNewExtra}></BasicTextFieldOutline>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
 
-                            <BasicTextFieldOutline label={"Pasta para as Imagens"} value={newFolder} set={setNewFolder}></BasicTextFieldOutline>
+                                <BasicTextFieldOutline label={"Titulo do Bastidor"} value={newExtra} set={setNewExtra}></BasicTextFieldOutline>
+
+                                <BasicTextFieldOutline label={"Pasta para as Imagens"} value={newFolder} set={setNewFolder}></BasicTextFieldOutline>
+                            </div>
+
                             <p>Nota:Na pasta coloquem apenas uma palavra</p>
                         </div>
 
@@ -445,7 +449,7 @@ const EditExtras = () => {
                         titulo={""}
                         height={""}>
                         <div style={{ display: "flex", flexDirection: "row", gap: "16px" }}>
-                            
+
                             <p>Vais querer realmente apagar o Bastidor <strong>{selectExtra.titulo}</strong> </p>
                         </div>
 
