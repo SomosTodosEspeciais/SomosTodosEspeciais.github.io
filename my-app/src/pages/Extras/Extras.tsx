@@ -21,7 +21,7 @@ interface Extra {
 
 const Extras = () => {
 
-    const [extra, setAtividades] = useState<Extra[]>([]);
+    const [extra, setExtra] = useState<Extra[]>([]);
     const [paginasTotal, setPaginasTotal] = useState<number>(1);
     const [pageIndex, setPageIndex] = useState<number>(1);
     const [showExtra, setShowExtra] = useState<Extra[]>([]);
@@ -71,7 +71,7 @@ const Extras = () => {
                     };
                 }));
 
-                setAtividades(extrasComImagens);
+                setExtra(extrasComImagens);
                 setShowExtra(extrasComImagens.slice(0, atividadesPorPagina));
                 setPaginasTotal(Math.ceil(extrasComImagens.length / atividadesPorPagina));
             } catch (error) {

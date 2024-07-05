@@ -28,7 +28,7 @@ const Profile = () => {
     return (<>
 
         <div className='Profile'>
-            <div className={currentMenu === "TaskHistory" || currentMenu === "ServiceProfile" ? "profileBoxBig" : "profileBox"}>
+            <div className={currentMenu === "extras" || currentMenu === "atividades" ? "profileBoxBig" : "profileBox"}>
                 <div className='profileBoxCollumn1'>
 
                     <button className={currentMenu === "Profile" || currentMenu === "EditProfile" ? "selected" : "free"}
