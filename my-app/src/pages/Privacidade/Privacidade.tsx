@@ -5,7 +5,7 @@ const Privacidade = () => {
     return (
         <div className="Privacidade">
             <div className='header'> <h1>Política de Privacidade</h1></div>
-            
+
             <div style={{ marginBottom: "3%" }}></div>
             <div className='content'>
 
@@ -82,12 +82,23 @@ const Privacidade = () => {
                 <div style={{ marginBottom: "2.5%" }}></div>
                 <h1>Gerir Cookies</h1>
                 <p>Como gerir as cookies
-                Pode alterar as definições do seu navegador para não aceitar cookies. Para tal, consulte o website allaboutcookies.org. No entanto, se o fizer, alguns dos recursos do nosso website poderão não funcionar corretamente.</p>
+                    Pode alterar as definições do seu navegador para não aceitar cookies. Para tal, consulte o website allaboutcookies.org. No entanto, se o fizer, alguns dos recursos do nosso website poderão não funcionar corretamente.</p>
                 <div style={{ marginBottom: "2.5%" }}></div>
                 <h1>Conteúdo incorporado de outros sites</h1>
                 <p>
-                O site do Todos Somos Especiais contém links para outros sites. A nossa política de privacidade aplica-se apenas ao nosso site, portanto, se clicar num link para outro site, deverá ler a sua respetiva política de privacidade.                </p>
-               
+                    O site do Todos Somos Especiais contém links para outros sites. A nossa política de privacidade aplica-se apenas ao nosso site, portanto, se clicar num link para outro site, deverá ler a sua respetiva política de privacidade.                </p>
+
+                <div style={{ marginBottom: "2.5%" }}></div>
+                <h1>Cookies de Terceiros</h1>
+                <p>
+                    Em alguns casos especiais, também usamos cookies fornecidos por terceiros confiáveis. A seção a seguir detalha quais cookies de terceiros você poderá encontrar no nosso website.
+                </p>
+
+                <h2>Firebase Authentication</h2>
+                <p>
+                    O Firebase Authentication usa cookies e local storage para armazenar os tokens de autenticação e outros dados de sessão. Esses cookies e dados de local storage são utilizados para manter o usuário autenticado enquanto ele navega pelo site e também para restaurar a sessão do usuário em visitas futuras, até que o token de autenticação expire ou o usuário faça logout manualmente.
+                </p>
+
 
                 <div style={{ marginBottom: "2.5%" }}></div>
                 <h1>Compromisso do utilizador</h1>

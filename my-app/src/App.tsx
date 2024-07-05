@@ -12,14 +12,17 @@ import Extras from './pages/Extras/Extras';
 import History from './pages/History/History';
 import Privacidade from './pages/Privacidade/Privacidade';
 import TermosCondicoes from './pages/TermosCondicoes/TermosCondicoes';
-import CookieConsent from "react-cookie-consent";
+import CookieConsent, { Cookies, getCookieConsentValue }  from "react-cookie-consent";
 import { AuthProvider } from './context/AuthContext/AuthContext';
 import AdminView from './pages/AdminView/AdminView';
 import { ProtectedRoute } from './ProtectedRoute/ProtectedRoute';
 import Profile from './pages/Profile/Profile';
+import { useState } from 'react';
 
 
 function App() {
+  const [cookieAccepted, setCookieAccepted] = useState<string>(getCookieConsentValue("cookieAccepted")?"true":"");
+  
   return (
     <div className="App">
       <HashRouter  >
@@ -27,7 +30,8 @@ function App() {
 
           location="bottom"
           buttonText="Aceitar"
-          cookieName="myAwesomeCookieName2"
+          cookieName="cookieAccepted"
+          onAccept={()=>{setCookieAccepted('true')}}
           style={{ background: "#2B373B" }}
           buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
           expires={150}
@@ -35,7 +39,7 @@ function App() {
           Este website usa cookies para otimizar a sua experiência.{" "}
           <Link to={"/politica-privacidade"}>Detalhes.</Link>
         </CookieConsent>
-        <AuthProvider>
+        <AuthProvider cookiesAccepted={cookieAccepted}>
           <Navbar />
             <Routes>
               <Route path='/' element={<HomePage />} />
