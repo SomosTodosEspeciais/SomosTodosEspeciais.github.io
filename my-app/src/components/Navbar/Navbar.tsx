@@ -113,7 +113,7 @@ const Navbar = () => {
                   <li>
                     <React.Fragment>
                       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                        <Tooltip title="Account settings">
+                        <Tooltip title="Definições de Conta">
                           <IconButton
                             onClick={handleClick}
                             size="small"
@@ -285,7 +285,7 @@ const Navbar = () => {
                   <li>
                     <React.Fragment>
                       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                        <Tooltip title="Account settings">
+                        <Tooltip title="Definições de Conta">
                           <IconButton
                             onClick={handleClick}
                             size="small"
