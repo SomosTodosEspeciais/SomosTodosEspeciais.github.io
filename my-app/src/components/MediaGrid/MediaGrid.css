@@ -6,7 +6,7 @@
     width: 90%;
 }
 
-.media-items-container {
+.media-grid .media-items-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
@@ -32,21 +32,21 @@
     }
 }
 
-.media-item {
+.media-grid .media-item {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.media-content {
+.media-grid .media-content {
     width: 350px;
     height: 250px;
 }
 
 
 @media (max-width: 900px) {
-    .media-content {
+    .media-grid .media-content {
         width: 250px;
         height: 150px;
     }

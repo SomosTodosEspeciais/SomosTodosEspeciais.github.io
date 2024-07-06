@@ -213,7 +213,7 @@ const EditExtras = () => {
 
     const handleAddTema = async () => {
         const pastas = extra.map(e => e.pasta);
-        if (pastas.includes("Bastidores/" + newFolder)) {
+        if (pastas.includes("Bastidores/" + newExtra)) {
             enqueueSnackbar(
                 <Typography
                     fontFamily={"Open Sans Variable"}
@@ -221,7 +221,7 @@ const EditExtras = () => {
                     fontSize={"14px"}
                     lineHeight={"20.02px"}
                 >
-                    A pasta {newFolder} já esta em utilização, utiliza outra!
+                    O título {newExtra} já foi usado no passado ou é usado agora, utiliza outra!
                 </Typography>
                 , {
                     action: actionErrorInfo,
@@ -430,10 +430,9 @@ const EditExtras = () => {
 
                                 <BasicTextFieldOutline label={"Titulo do Bastidor"} value={newExtra} set={setNewExtra}></BasicTextFieldOutline>
 
-                                <BasicTextFieldOutline label={"Pasta para as Imagens"} value={newFolder} set={setNewFolder}></BasicTextFieldOutline>
                             </div>
 
-                            <p>Nota:Na pasta coloquem apenas uma palavra</p>
+                           
                         </div>
 
                     </ModalExtra>
