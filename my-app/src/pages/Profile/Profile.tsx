@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext/AuthContext'; // Importando o contexto de autenticação
 import EditExtras from '../../components/EditExtras/EditExtras';
+import EditAtividades from '../../components/EditAtividades/EditAtividades';
 
 
 
@@ -69,6 +70,9 @@ const Profile = () => {
                 <div className='profileBoxCollumn2'>
                     <div className={currentMenu === "extras" ? "profileSelected" : "menuFree"}>
                         <EditExtras></EditExtras>
+                    </div>
+                    <div className={currentMenu === "atividades" ? "profileSelected" : "menuFree"}>
+                        <EditAtividades></EditAtividades>
                     </div>
                 </div>
             </div>
