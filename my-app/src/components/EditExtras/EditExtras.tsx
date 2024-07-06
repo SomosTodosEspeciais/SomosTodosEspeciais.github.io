@@ -44,7 +44,6 @@ const EditExtras = () => {
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [openModal2, setOpenModal2] = useState<boolean>(false);
-    const [newFolder, setNewFolder] = useState<string>("");
     const [newExtra, setNewExtra] = useState<string>("");
 
     function extractFileNameFromUrl1(url: string): string | null {
@@ -194,20 +193,15 @@ const EditExtras = () => {
     const handleRemoveTema = async () => {
         try {
             const id = selectExtra.id
-            // Obtém a referência do documento no Firestore
             const docRef = doc(db, 'bastidor', id);
 
-            // Remove o documento do Firestore
             await deleteDoc(docRef);
 
-            console.log(`Tema com ID ${id} removido com sucesso do Firestore.`);
-
-            // Atualiza o estado local removendo o tema da lista extra
             setExtra(prevExtra => prevExtra.filter(item => item.id !== id));
             setOpenModal2(false)
         } catch (error) {
             console.error("Erro ao remover tema:", error);
-            // Tratar erros de forma apropriada, dependendo do seu aplicativo
+            
         }
     };
 
@@ -228,11 +222,11 @@ const EditExtras = () => {
                     variant: 'error',
                     autoHideDuration: 10000
                 });
-            setNewFolder("")
+            setNewExtra("")
             return
         }
 
-        if (newFolder == "" || newExtra == "") {
+        if (newExtra == "") {
 
             enqueueSnackbar(
                 <Typography
@@ -241,14 +235,14 @@ const EditExtras = () => {
                     fontSize={"14px"}
                     lineHeight={"20.02px"}
                 >
-                    É necessário ter Titulo como Pasta
+                    É necessário ter Titulo
                 </Typography>
                 , {
                     action: actionErrorInfo,
                     variant: 'error',
                     autoHideDuration: 10000
                 });
-            setNewFolder("")
+            
             return
 
         }
@@ -257,7 +251,7 @@ const EditExtras = () => {
             const docRef = await addDoc(collection(db, 'bastidor'), {
                 titulo: newExtra,
                 imagens: [],
-                pasta: "Bastidores/" + newFolder,
+                pasta: "Bastidores/" + newExtra,
                 descricao: ""
             });
 
@@ -280,7 +274,6 @@ const EditExtras = () => {
 
             closeModal();
             setNewExtra("");
-            setNewFolder("");
             setSelectedExtra(newTema)
             setTema(newExtra)
         } catch (error: any) {
@@ -289,56 +282,58 @@ const EditExtras = () => {
         }
     };
 
-    const addImageUrlToExtra = async (extraId: string, downloadURL: string, urlOriginal: string) => {
-
+    const addImageUrlToExtra = async (extraId: string, downloadURLs: string[], urlOriginals: string[]) => {
         try {
-
+            // Adicionando URLs originais às imagens existentes
             const urlsOriginais = selectExtra.imagens.map(imagem => imagem.url_original);
-            const newImagens = [...urlsOriginais, urlOriginal];
-
+            const newImagens = [...urlsOriginais, ...urlOriginals];
+    
+            // Referência ao documento no Firestore
             const docRef = doc(db, "bastidor", selectExtra.id);
-
+    
+            // Atualizando o documento no Firestore
             await updateDoc(docRef, { imagens: newImagens });
-
-            const regex = /[^/]+(?=\?alt=media)/;
-            const match = downloadURL.match(regex);
-            let type: 'image' | 'video' = 'image';
-
-            if (match) {
-                const fileName = match[0];
-                const extension = fileName.split('.').pop()?.toLowerCase();
-                if (extension === 'mp4') {
-                    type = 'video';
+    
+            // Processando cada URL e atualizando o estado local
+            const newImagensData = downloadURLs.map((downloadURL, index) => {
+                const regex = /[^/]+(?=\?alt=media)/;
+                const match = downloadURL.match(regex);
+                let type: 'image' | 'video' = 'image';
+    
+                if (match) {
+                    const fileName = match[0];
+                    const extension = fileName.split('.').pop()?.toLowerCase();
+                    if (extension === 'mp4') {
+                        type = 'video';
+                    }
+    
+                    return {
+                        url: downloadURL,
+                        type: type,
+                        url_original: urlOriginals[index],
+                    };
                 }
-
-                let tmp_url: { url: string; type: 'image' | 'video'; url_original: string } = {
-                    url: downloadURL,
-                    type: type,
-                    url_original: urlOriginal,
-                };
-
-                setSelectedExtra(prevState => ({
-                    ...prevState,
-                    imagens: [...prevState.imagens, tmp_url],
-                }));
-
-                setExtra(prevExtra =>
-                    prevExtra.map(ex =>
-                        ex.id === selectExtra.id
-                            ? { ...ex, imagens: [...ex.imagens, tmp_url] }
-                            : ex
-                    )
-                );
-            }
-
-
-
+    
+                return undefined;  
+            }).filter((item): item is { url: string; type: 'image' | 'video'; url_original: string } => item !== undefined);
+    
+            setSelectedExtra((prevState: Extra) => ({
+                ...prevState,
+                imagens: [...prevState.imagens, ...newImagensData],
+            }));
+    
+            setExtra((prevExtra: Extra[]) =>
+                prevExtra.map(ex =>
+                    ex.id === selectExtra.id
+                        ? { ...ex, imagens: [...ex.imagens, ...newImagensData] }
+                        : ex
+                )
+            );
+    
         } catch (error) {
             console.error("Erro ao adicionar URL ao documento:", error);
         }
     };
-
-
 
 
     const closeModal = () => {
@@ -353,6 +348,7 @@ const EditExtras = () => {
             <SnackbarProvider classes={{ root: 'snackbarMaxWidth' }} maxSnack={4} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant='info' autoHideDuration={null} hideIconVariant={true} >
 
                 <div className="top-temas">
+                    
                     <div className="temas">
                         {extra.map(({ titulo, id }, index) => (
                             <div
@@ -381,8 +377,9 @@ const EditExtras = () => {
                         <React.Fragment key={`extra-${index}`}>
                             <div className="remove">
                                 <VideoProcessor
+                                    key={index}
                                     extra={item}
-                                    addImageUrl={(downloadURL, urlOriginal) => addImageUrlToExtra(item.id, downloadURL, urlOriginal)}
+                                    addImageUrlToExtra={(downloadURL, urlOriginal) => addImageUrlToExtra(item.id, downloadURL, urlOriginal)}
                                 />
                             </div>
                             <div className="imagesGrid">
