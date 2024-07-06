@@ -21,72 +21,7 @@ interface VideoProcessorProps {
 const VideoProcessor: React.FC<VideoProcessorProps> = ({ extra, addImageUrlToExtra }) => {
     const [files, setFiles] = useState<File[]>([]);
     const [processing, setProcessing] = useState<boolean>(false);
-    const [previewUrls, setPreviewUrls] = useState<{ [key: string]: string }>({});
     const isSmallScreen = useMediaQuery('(max-width: 900px)');
-
-    useEffect(() => {
-        const urls: { [key: string]: string } = {};
-
-        // Função para adicionar URL de pré-visualização para cada arquivo
-        const addPreviewUrl = (file: File, url: string) => {
-            setPreviewUrls(prevUrls => ({
-                ...prevUrls,
-                [file.name]: url
-            }));
-        };
-
-        // Função auxiliar para verificar se todas as URLs estão prontas
-        const checkAndSetPreviewUrls = () => {
-            if (Object.keys(urls).length === files.length) {
-                setPreviewUrls(urls);
-            }
-        };
-
-        files.forEach(file => {
-            const reader = new FileReader();
-            reader.onload = () => {
-                if (typeof reader.result === 'string') {
-                    addPreviewUrl(file, reader.result); // Adicionar a URL de pré-visualização para este arquivo
-                    urls[file.name] = reader.result; // Armazenar a URL de pré-visualização no objeto urls
-                    checkAndSetPreviewUrls(); // Verificar e definir as URLs de pré-visualização quando todas estiverem prontas
-                }
-            };
-            reader.readAsDataURL(file);
-        });
-
-        // Certifique-se de verificar e definir as URLs de pré-visualização uma última vez
-        // Se files.length for inicialmente zero, precisamos garantir que as URLs sejam definidas
-        checkAndSetPreviewUrls();
-
-    }, [files]);
-
-    const processVideoFiles = async (files: File[]) => {
-        try {
-            const storage = getStorage();
-            const uploadPromises = files.map(async (file) => {
-                const storageRef = ref(storage, `${extra.pasta}/${file.name}`);
-
-                const snapshot = await uploadBytes(storageRef, file);
-                const downloadURL = await getDownloadURL(snapshot.ref);
-
-                let url_original: string = `https://storage.googleapis.com/${app.options.storageBucket}`;
-                url_original = url_original + `/${extra.pasta}/${file.name}`;
-
-                return { downloadURL, url_original };
-            });
-
-            const uploadedFiles = await Promise.all(uploadPromises);
-
-            const downloadURLs = uploadedFiles.map(file => file.downloadURL);
-            const urlOriginals = uploadedFiles.map(file => file.url_original);
-
-            await addImageUrlToExtra(downloadURLs, urlOriginals);
-        } catch (error) {
-            console.error("Error uploading files or updating Firestore:", error);
-        } finally {
-            setProcessing(false); // Definir processing como false independentemente do resultado
-        }
-    };
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFiles = Array.from(event.target.files || []);
@@ -101,14 +36,35 @@ const VideoProcessor: React.FC<VideoProcessorProps> = ({ extra, addImageUrlToExt
         if (files.length === 0) return;
 
         setProcessing(true);
-        await processVideoFiles(files);
-        setFiles([]);
-        setPreviewUrls({});
+
+        try {
+            const storage = getStorage();
+            const uploadPromises = files.map(async (file) => {
+                const storageRef = ref(storage, `${extra.pasta}/${file.name}`);
+                const snapshot = await uploadBytes(storageRef, file);
+                const downloadURL = await getDownloadURL(snapshot.ref);
+
+                let url_original: string = `https://storage.googleapis.com/${app.options.storageBucket}/${extra.pasta}/${file.name}`;
+
+                return { downloadURL, url_original };
+            });
+
+            const uploadedFiles = await Promise.all(uploadPromises);
+
+            const downloadURLs = uploadedFiles.map(file => file.downloadURL);
+            const urlOriginals = uploadedFiles.map(file => file.url_original);
+
+            await addImageUrlToExtra(downloadURLs, urlOriginals);
+        } catch (error) {
+            console.error("Error uploading files or updating Firestore:", error);
+        } finally {
+            setProcessing(false);
+            setFiles([]); // Limpar os arquivos depois de processados
+        }
     };
 
     const handleRemoveFiles = () => {
         setFiles([]);
-        setPreviewUrls({});
     };
 
     return (
@@ -143,23 +99,22 @@ const VideoProcessor: React.FC<VideoProcessorProps> = ({ extra, addImageUrlToExt
                 </Button>
             </div>
 
-            {Object.keys(previewUrls).length > 0 && (
+            {files.length > 0 && (
                 <>
                     <h3>Previews:</h3>
-                    <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', gap: '20px',width:"100%" }}>
+                    <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
                         {files.map((file, index) => (
-                            <div key={file.name} style={{ flexBasis: 'calc(25% - 20px)', marginTop: '20px',marginLeft:"1%" }}>
+                            <div className="media-item" key={file.name}>
                                 {file.type.startsWith('image/') ? (
-                                    <img src={previewUrls[file.name]} alt={`Preview ${index}`} style={{ width: isSmallScreen ? 100 : 200, height: isSmallScreen ? 150 : 300 }} />
+                                    <img src={URL.createObjectURL(file)} alt={`Preview ${index}`} style={{ width: isSmallScreen ? 150 : 300, height: isSmallScreen ? 150 : 300 }} />
                                 ) : (
                                     <VideoPlayer
-                                        key={index}
                                         height={isSmallScreen ? 150 : 300}
                                         isFluid
                                         playbackRates={[0.5, 1, 1.5, 2]}
-                                        sources={[{ src: previewUrls[file.name], type: 'video/mp4' }]}
+                                        sources={[{ src: URL.createObjectURL(file), type: 'video/mp4' }]}
                                         theme="fantasy"
-                                        width={isSmallScreen ? 100 : 200}
+                                        width={isSmallScreen ? 150 : 300}
                                     />
                                 )}
                             </div>
