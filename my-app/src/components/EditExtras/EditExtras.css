@@ -74,6 +74,19 @@
     align-items: center;
 }
 
+.EditExtras .descricao-atividades {
+    width: 80%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    margin: 20px auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 40px;
+}
+
 @media (max-width: 900px) {
     .EditExtras {
         width: 100%;
@@ -102,5 +115,17 @@
         display: flex;
         justify-content: center;
         margin-bottom: 25px;
+    }
+
+    .EditAtividades .descricao-atividades {
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+        margin: 20px auto;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 20px;
     }
 }

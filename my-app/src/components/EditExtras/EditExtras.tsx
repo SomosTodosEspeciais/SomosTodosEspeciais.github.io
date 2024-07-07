@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../../components/SlideImages/SlideImages.css';
 import './EditExtras.css';
-import { useMediaQuery, Button, Typography } from '@mui/material';
+import { useMediaQuery, Button, Typography,IconButton, Modal ,TextField } from '@mui/material';
 import { db } from '../../Firebase/firebase';
 import { getDownloadURL, ref, getStorage, listAll } from "firebase/storage";
 import MediaGrid from "../MediaGrid/MediaGrid";
@@ -14,7 +14,7 @@ import BasicTextFieldOutline from "../BasicTextFieldOutline/BasicTextFieldOutlin
 import VideoProcessor from "../VideoProcessor/VideoProcessor";
 import { SnackbarKey, SnackbarProvider, closeSnackbar, enqueueSnackbar } from 'notistack';
 import ModalConfirm from "../ModalConfirm/ModalConfirm";
-
+import EditIcon from "@mui/icons-material/Edit";
 interface Extra {
     id: string;
     titulo: string;
@@ -45,6 +45,9 @@ const EditExtras = () => {
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [openModal2, setOpenModal2] = useState<boolean>(false);
     const [newExtra, setNewExtra] = useState<string>("");
+
+    const [editTituloOpen, setEditTituloOpen] = useState<boolean>(false);
+    const [editedTitulo, setEditedTitulo] = useState<string>("");
 
     function extractFileNameFromUrl1(url: string): string | null {
         if (!url) return null;
@@ -201,7 +204,7 @@ const EditExtras = () => {
             setOpenModal2(false)
         } catch (error) {
             console.error("Erro ao remover tema:", error);
-            
+
         }
     };
 
@@ -242,7 +245,7 @@ const EditExtras = () => {
                     variant: 'error',
                     autoHideDuration: 10000
                 });
-            
+
             return
 
         }
@@ -287,41 +290,41 @@ const EditExtras = () => {
             // Adicionando URLs originais às imagens existentes
             const urlsOriginais = selectExtra.imagens.map(imagem => imagem.url_original);
             const newImagens = [...urlsOriginais, ...urlOriginals];
-    
+
             // Referência ao documento no Firestore
             const docRef = doc(db, "bastidor", selectExtra.id);
-    
+
             // Atualizando o documento no Firestore
             await updateDoc(docRef, { imagens: newImagens });
-    
+
             // Processando cada URL e atualizando o estado local
             const newImagensData = downloadURLs.map((downloadURL, index) => {
                 const regex = /[^/]+(?=\?alt=media)/;
                 const match = downloadURL.match(regex);
                 let type: 'image' | 'video' = 'image';
-    
+
                 if (match) {
                     const fileName = match[0];
                     const extension = fileName.split('.').pop()?.toLowerCase();
                     if (extension === 'mp4') {
                         type = 'video';
                     }
-    
+
                     return {
                         url: downloadURL,
                         type: type,
                         url_original: urlOriginals[index],
                     };
                 }
-    
-                return undefined;  
+
+                return undefined;
             }).filter((item): item is { url: string; type: 'image' | 'video'; url_original: string } => item !== undefined);
-    
+
             setSelectedExtra((prevState: Extra) => ({
                 ...prevState,
                 imagens: [...prevState.imagens, ...newImagensData],
             }));
-    
+
             setExtra((prevExtra: Extra[]) =>
                 prevExtra.map(ex =>
                     ex.id === selectExtra.id
@@ -329,10 +332,43 @@ const EditExtras = () => {
                         : ex
                 )
             );
-    
+
         } catch (error) {
             console.error("Erro ao adicionar URL ao documento:", error);
         }
+    };
+
+
+    const handleEditTitulo = (descricao: string) => {
+        setEditedTitulo(descricao);
+        setEditTituloOpen(true);
+    };
+
+    const handleCancelEditTitulo = () => {
+        setEditTituloOpen(false);
+        setEditedTitulo("");
+    };
+
+    const handleSaveTitulo = async () => {
+        if (selectExtra.descricao !== editedTitulo) {
+            const docRef = doc(db, "bastidor", selectExtra.id);
+            await updateDoc(docRef, { descricao: editedTitulo });
+
+            setSelectedExtra((prevState: Extra) => ({
+                ...prevState,
+                descricao: editedTitulo,
+            }));
+
+            setExtra((prevAtividade: Extra[]) =>
+                prevAtividade.map(ex =>
+                    ex.id === selectExtra.id
+                        ? { ...ex, descricao: editedTitulo }
+                        : ex
+                )
+            );
+        }
+        setEditTituloOpen(false);
+        setEditedTitulo("");
     };
 
 
@@ -348,7 +384,7 @@ const EditExtras = () => {
             <SnackbarProvider classes={{ root: 'snackbarMaxWidth' }} maxSnack={4} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant='info' autoHideDuration={null} hideIconVariant={true} >
 
                 <div className="top-temas">
-                    
+
                     <div className="temas">
                         {extra.map(({ titulo, id }, index) => (
                             <div
@@ -375,6 +411,20 @@ const EditExtras = () => {
                 {extra.map((item, index) => (
                     item.titulo === tema && (
                         <React.Fragment key={`extra-${index}`}>
+                            <div className="descricao-atividades">
+                                <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', justifyContent: "space-between" }}>
+                                    <h2 style={{ flex: 1 }}>Editar Título</h2>
+                                    <IconButton
+                                        sx={{ ml: 2 }}
+                                        onClick={() => handleEditTitulo(item.titulo)}
+                                    >
+                                        <EditIcon />
+                                    </IconButton>
+                                </Typography>
+                                <Typography variant="body1" gutterBottom sx={{ whiteSpace: 'pre-line', fontSize: isSmallScreen ? '1.0rem' : '1.25rem' }}>
+                                    {item.titulo}
+                                </Typography>
+                            </div>
                             <div className="remove">
                                 <VideoProcessor
                                     key={index}
@@ -429,7 +479,7 @@ const EditExtras = () => {
 
                             </div>
 
-                           
+
                         </div>
 
                     </ModalExtra>
@@ -451,6 +501,43 @@ const EditExtras = () => {
 
                     </ModalConfirm>
                 }
+                <Modal open={editTituloOpen} onClose={handleCancelEditTitulo}>
+                    <div style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        backgroundColor: '#fff',
+                        border: '2px solid #000',
+                        boxShadow: '4px 4px 8px rgba(0, 0, 0, 0.2)',
+                        padding: '20px',
+                        width: isSmallScreen ? "90%" : "900px",
+
+                        minWidth: isSmallScreen ? "" : '300px',
+                        maxWidth: '800px',
+                        textAlign: 'center'
+                    }}>
+                        <Typography variant="h6">Editar Descrição</Typography>
+                        <TextField
+                            fullWidth
+                            multiline
+                            rows={15}
+                            value={editedTitulo}
+                            onChange={(e) => setEditedTitulo(e.target.value)}
+                            variant="outlined"
+                            placeholder="Insira a nova descrição"
+                        />
+                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "50px", marginTop: "25px" }}>
+                            <Button variant="contained" color="primary" onClick={handleSaveTitulo}>
+                                Salvar
+                            </Button>
+                            <Button variant="contained" color="secondary" onClick={handleCancelEditTitulo}>
+                                Cancelar
+                            </Button>
+                        </div>
+
+                    </div>
+                </Modal>
             </SnackbarProvider>
         </div>
 
