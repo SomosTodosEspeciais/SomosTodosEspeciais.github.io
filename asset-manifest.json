@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.3b863974.css",
-    "main.js": "/static/js/main.3382b0f7.js",
+    "main.css": "/static/css/main.0e9931b5.css",
+    "main.js": "/static/js/main.97cbe425.js",
     "static/js/453.68693753.chunk.js": "/static/js/453.68693753.chunk.js",
     "static/media/equipa-ligia.jpg": "/static/media/equipa-ligia.b1fa2ceb9fc1de0348ab.jpg",
     "static/media/equipa-marcia.jpg": "/static/media/equipa-marcia.994150dd6e1d4e785171.jpg",
@@ -22,12 +22,12 @@
     "static/media/instagram.png": "/static/media/instagram.edb90ecc706a7a25542b.png",
     "static/media/todos-icon.jpg": "/static/media/todos-icon.f5995624cf52aff3648f.jpg",
     "index.html": "/index.html",
-    "main.3b863974.css.map": "/static/css/main.3b863974.css.map",
-    "main.3382b0f7.js.map": "/static/js/main.3382b0f7.js.map",
+    "main.0e9931b5.css.map": "/static/css/main.0e9931b5.css.map",
+    "main.97cbe425.js.map": "/static/js/main.97cbe425.js.map",
     "453.68693753.chunk.js.map": "/static/js/453.68693753.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3b863974.css",
-    "static/js/main.3382b0f7.js"
+    "static/css/main.0e9931b5.css",
+    "static/js/main.97cbe425.js"
   ]
 }
