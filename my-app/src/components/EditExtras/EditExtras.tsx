@@ -350,25 +350,28 @@ const EditExtras = () => {
     };
 
     const handleSaveTitulo = async () => {
-        if (selectExtra.descricao !== editedTitulo) {
+        let new_title = ""
+        if (selectExtra.titulo !== editedTitulo) {
+            new_title = selectExtra.titulo
             const docRef = doc(db, "bastidor", selectExtra.id);
-            await updateDoc(docRef, { descricao: editedTitulo });
+            await updateDoc(docRef, { titulo: editedTitulo });
 
             setSelectedExtra((prevState: Extra) => ({
                 ...prevState,
-                descricao: editedTitulo,
+                titulo: editedTitulo,
             }));
 
             setExtra((prevAtividade: Extra[]) =>
                 prevAtividade.map(ex =>
                     ex.id === selectExtra.id
-                        ? { ...ex, descricao: editedTitulo }
+                        ? { ...ex, titulo: editedTitulo }
                         : ex
                 )
             );
+            setEditedTitulo(new_title);
         }
         setEditTituloOpen(false);
-        setEditedTitulo("");
+        
     };
 
 
