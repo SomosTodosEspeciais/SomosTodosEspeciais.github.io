@@ -18,7 +18,13 @@ interface Extra {
     pasta: string;
 }
 
-
+interface Extra_Data {
+    id: string;
+    titulo: string;
+    imagens: string[];
+    descricao: string;
+    pasta: string;
+}
 const Extras = () => {
 
     const [extra, setExtra] = useState<Extra[]>([]);
@@ -27,46 +33,97 @@ const Extras = () => {
     const [showExtra, setShowExtra] = useState<Extra[]>([]);
     const atividadesPorPagina = 2;
 
+    function extractFileNameFromUrl1(url: string): string | null {
+        if (!url) return null;
+
+        const regex = /\/([^/]+)$/;
+        const match = url.match(regex);
+        return match && match[1] ? match[1] : null;
+    }
+
+    function extractFileNameFromUrl(url: string): string | null {
+        const regex = /\/([^/]+)$/; 
+        const match = decodeURIComponent(url).match(regex); 
+        return match && match[1] ? match[1] : null;
+    }
+
     useEffect(() => {
         AOS.init({
-            once: false, // Permitir animações repetidas ao subir na página
+            once: false, 
         });
         const fetchExtra = async () => {
             try {
                 const querySnapshot = await getDocs(collection(db, "bastidor"));
-                const extrasData = querySnapshot.docs.map(doc => doc.data() as Extra);
+                const extrasData: Extra_Data[] = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    titulo: doc.data().titulo,
+                    imagens: doc.data().imagens,
+                    descricao: doc.data().descricao,
+                    pasta: doc.data().pasta
+                }));
 
-                const extrasComImagens = await Promise.all(extrasData.map(async (atividade) => {
-                    const pasta = atividade.pasta;
+                const extrasComImagens = await Promise.all(extrasData.map(async (extra_tmp) => {
+                    const pasta = extra_tmp.pasta || "";
 
-                    const getFolderFiles = async (folderPath: string): Promise<{ url: string, type: 'image' | 'video' }[]> => {
+                    const imagensObjetos: string[] = extra_tmp.imagens;
+
+                    const getFolderFiles = async (folderPath: string, imagensObjetos: string[]): Promise<{ url: string; type: 'image' | 'video'; url_original: string }[]> => {
                         const storage = getStorage();
                         const folderRef = ref(storage, folderPath);
-                        const filesList = await listAll(folderRef);
-                        const urls = await Promise.all(filesList.items.map(async (item) => {
-                            const imageUrl = await getDownloadURL(item);
-                            const regex = /[^/]+(?=\?alt=media)/;
-                            const match = imageUrl.match(regex);
-                            let type: 'image' | 'video' = 'image'; // Default to 'image'
 
-                            if (match) {
-                                const fileName = match[0];
-                                const extension = fileName.split('.').pop()?.toLowerCase();
-                                if (extension === 'mp4') {
-                                    type = 'video';
+                        try {
+                            // Listar todos os itens na pasta do Storage
+                            const filesList = await listAll(folderRef);
+
+                            // Filtrar apenas as imagens que estão na lista do Firestore
+                            const filteredFiles = filesList.items.filter(item => {
+                                const fileName = item.name;
+                                return imagensObjetos.some(img => {
+                                    return extractFileNameFromUrl1(img) === fileName
+                                });
+                            });
+
+                            // Obter os URLs para os arquivos filtrados
+                            const urls = await Promise.all(filteredFiles.map(async (item) => {
+                                const imageUrl = await getDownloadURL(item);
+                                const regex = /[^/]+(?=\?alt=media)/;
+                                const match = imageUrl.match(regex);
+                                let type: 'image' | 'video' = 'image';
+                                let originalUrl: string = "";
+
+                                if (match) {
+                                    const fileName = match[0];
+                                    const extension = fileName.split('.').pop()?.toLowerCase();
+                                    if (extension === 'mp4') {
+                                        type = 'video';
+                                    }
+                                    // Encontrar o URL original correspondente no Firestore
+                                    for (let i = 0; i < imagensObjetos.length; i++) {
+                                        const img_tmp = imagensObjetos[i];
+                                        if (extractFileNameFromUrl1(img_tmp) === extractFileNameFromUrl(fileName)) {
+                                            originalUrl = img_tmp;
+                                            break;
+                                        }
+                                    }
                                 }
-                            }
 
-                            return { url: imageUrl, type };
-                        }));
-                        return urls;
+                                return { url: imageUrl, type: type, url_original: originalUrl };
+                            }));
+
+                            return urls;
+                        } catch (error) {
+                            console.error("Error listing files or fetching URLs:", error);
+                            return [];
+                        }
                     };
 
-
-                    const imageUrls = await getFolderFiles(pasta);
+                    const imageUrls = await getFolderFiles(pasta, imagensObjetos);
 
                     return {
-                        ...atividade,
+                        id: extra_tmp.id,
+                        titulo: extra_tmp.titulo,
+                        descricao: extra_tmp.descricao,
+                        pasta: extra_tmp.pasta,
                         imagens: imageUrls
                     };
                 }));
