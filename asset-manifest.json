@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.0e9931b5.css",
-    "main.js": "/static/js/main.016b3c6f.js",
+    "main.css": "/static/css/main.1243d31e.css",
+    "main.js": "/static/js/main.fc349569.js",
     "static/js/453.68693753.chunk.js": "/static/js/453.68693753.chunk.js",
     "static/media/equipa-ligia.jpg": "/static/media/equipa-ligia.b1fa2ceb9fc1de0348ab.jpg",
     "static/media/equipa-marcia.jpg": "/static/media/equipa-marcia.994150dd6e1d4e785171.jpg",
@@ -11,6 +11,7 @@
     "static/media/gatos-18.jpg": "/static/media/gatos-18.8aaa03e9a04530d3ecf0.jpg",
     "static/media/equipa-paulo.jpeg": "/static/media/equipa-paulo.5837006d0db8a9207f3d.jpeg",
     "static/media/flores-3.png": "/static/media/flores-3.7c0c0e8dd6a4423dc302.png",
+    "static/media/Paulo.jpeg": "/static/media/Paulo.1df5d5286289db2c86e3.jpeg",
     "static/media/equipa-joana.jpeg": "/static/media/equipa-joana.341229a170a33c3423c8.jpeg",
     "static/media/equipa-sandra.jpeg": "/static/media/equipa-sandra.f7ccaeaf695bab558129.jpeg",
     "static/media/equipa-nani.jpeg": "/static/media/equipa-nani.9dd71e3469e3a96e2628.jpeg",
@@ -22,12 +23,12 @@
     "static/media/instagram.png": "/static/media/instagram.edb90ecc706a7a25542b.png",
     "static/media/todos-icon.jpg": "/static/media/todos-icon.f5995624cf52aff3648f.jpg",
     "index.html": "/index.html",
-    "main.0e9931b5.css.map": "/static/css/main.0e9931b5.css.map",
-    "main.016b3c6f.js.map": "/static/js/main.016b3c6f.js.map",
+    "main.1243d31e.css.map": "/static/css/main.1243d31e.css.map",
+    "main.fc349569.js.map": "/static/js/main.fc349569.js.map",
     "453.68693753.chunk.js.map": "/static/js/453.68693753.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0e9931b5.css",
-    "static/js/main.016b3c6f.js"
+    "static/css/main.1243d31e.css",
+    "static/js/main.fc349569.js"
   ]
 }
