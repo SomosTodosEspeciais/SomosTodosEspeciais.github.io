@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.1243d31e.css",
-    "main.js": "/static/js/main.fc349569.js",
+    "main.js": "/static/js/main.d104ebc5.js",
     "static/js/453.68693753.chunk.js": "/static/js/453.68693753.chunk.js",
     "static/media/equipa-ligia.jpg": "/static/media/equipa-ligia.b1fa2ceb9fc1de0348ab.jpg",
     "static/media/equipa-marcia.jpg": "/static/media/equipa-marcia.994150dd6e1d4e785171.jpg",
@@ -24,11 +24,11 @@
     "static/media/todos-icon.jpg": "/static/media/todos-icon.f5995624cf52aff3648f.jpg",
     "index.html": "/index.html",
     "main.1243d31e.css.map": "/static/css/main.1243d31e.css.map",
-    "main.fc349569.js.map": "/static/js/main.fc349569.js.map",
+    "main.d104ebc5.js.map": "/static/js/main.d104ebc5.js.map",
     "453.68693753.chunk.js.map": "/static/js/453.68693753.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1243d31e.css",
-    "static/js/main.fc349569.js"
+    "static/js/main.d104ebc5.js"
   ]
 }
