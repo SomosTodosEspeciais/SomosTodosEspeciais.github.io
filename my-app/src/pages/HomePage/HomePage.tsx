@@ -11,6 +11,8 @@ import flower3 from '../../assets/flores-3.png';
 import Flower from '../../components/Flower/Flower';
 import { Key, useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import Modal from '../../components/Modal/Modal';
+import Paulo from "../../assets/Paulo.jpeg"
 
 
 
@@ -31,7 +33,15 @@ interface FlowerPosition {
 const HomePage = () => {
   const isSmallScreen = useMediaQuery('(max-width: 900px)');
   const [flowers, setFlowers] = useState<FlowerPosition[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = (index: number) => {
+    setIsModalOpen(true);
 
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const calculateFlowerPositions = () => {
@@ -97,6 +107,8 @@ const HomePage = () => {
   }, [isSmallScreen]);
 
 
+
+
   const data = {
     generalObjective: 'Fomentar uma cultura de inclusão e diversidade em todos os âmbitos da sociedade, com ênfase especial na ação comunitária e na solidariedade como ferramentas de transformação social.',
     specificObjectives: [
@@ -114,7 +126,7 @@ const HomePage = () => {
 
   return (
     <div className="HomePage">
-      
+
       <div className="lateral-left"></div>
       <div className="content">
         <div style={{ textAlign: "center" }}>
@@ -316,6 +328,32 @@ const HomePage = () => {
         </div>
       </div>
       <div className="lateral-right"></div>
+      {isModalOpen && (
+
+        <Modal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          titulo={"Parabéns Paulo"}
+          onSave={() => {
+            setIsModalOpen(false);
+          }}
+          showButtons={false}
+          height={'auto'}
+        >
+          <div style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
+            <Typography
+              variant='body1'
+              lineHeight={"24px"}
+              width={"60%"}
+            >
+              Um dia especial é feito de eventos especiais. 🌻
+              A equipa Todos Somos Especiais deseja-te um dia como tu, muito especial ♥️
+
+            </Typography>
+            <img src={Paulo} />
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };
