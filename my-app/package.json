@@ -1,80 +1,34 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "app",
   "private": true,
-  "homepage": "https://somostodosespeciais.github.io/",
-  "dependencies": {
-    "@emailjs/browser": "^4.3.3",
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@ffmpeg/ffmpeg": "^0.12.10",
-    "@ffmpeg/util": "^0.12.1",
-    "@graphland/react-video-player": "^0.1.14",
-    "@mui/icons-material": "^5.15.19",
-    "@react-pdf/renderer": "^3.4.4",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.98",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@types/react-router-dom": "^5.3.3",
-    "@types/video-react": "^0.15.8",
-    "aos": "^2.3.4",
-    "axios": "^1.7.2",
-    "bootstrap": "^5.3.3",
-    "firebase": "^10.12.2",
-    "firebase-admin": "^12.2.0",
-    "fs": "^0.0.1-security",
-    "notistack": "^3.0.1",
-    "path": "^0.12.7",
-    "pure-react-carousel": "^1.30.1",
-    "react": "^18.3.1",
-    "react-bootstrap": "^2.10.2",
-    "react-confetti-explosion": "^2.1.2",
-    "react-cookie": "^7.1.4",
-    "react-cookie-consent": "^9.0.0",
-    "react-dom": "^18.3.1",
-    "react-firebase-hooks": "^5.1.1",
-    "react-pageflip": "^2.0.3",
-    "react-pdf": "^9.0.0",
-    "react-router-dom": "^6.23.1",
-    "react-scripts": "5.0.1",
-    "react-scroll": "^1.9.0",
-    "sitemap": "^8.0.0",
-    "typescript": "^4.9.5",
-    "video-react": "^0.16.0",
-    "web-vitals": "^2.1.4"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -b main"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.0.1",
+    "react-redux": "^9.1.0",
+    "react-router-dom": "^6.22.0",
+    "react-slick": "^0.30.1",
+    "sass": "^1.70.0",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.8"
   },
   "devDependencies": {
-    "@types/aos": "^3.0.7",
-    "gh-pages": "^6.1.1"
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "vite": "^5.0.8"
   }
 }
