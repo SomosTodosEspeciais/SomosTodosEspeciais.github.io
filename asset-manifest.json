@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.1243d31e.css",
-    "main.js": "/static/js/main.d104ebc5.js",
+    "main.css": "/static/css/main.d37ee86c.css",
+    "main.js": "/static/js/main.d1fba4fe.js",
     "static/js/453.68693753.chunk.js": "/static/js/453.68693753.chunk.js",
     "static/media/equipa-ligia.jpg": "/static/media/equipa-ligia.b1fa2ceb9fc1de0348ab.jpg",
     "static/media/equipa-marcia.jpg": "/static/media/equipa-marcia.994150dd6e1d4e785171.jpg",
@@ -11,24 +11,25 @@
     "static/media/gatos-18.jpg": "/static/media/gatos-18.8aaa03e9a04530d3ecf0.jpg",
     "static/media/equipa-paulo.jpeg": "/static/media/equipa-paulo.5837006d0db8a9207f3d.jpeg",
     "static/media/flores-3.png": "/static/media/flores-3.7c0c0e8dd6a4423dc302.png",
-    "static/media/Paulo.jpeg": "/static/media/Paulo.1df5d5286289db2c86e3.jpeg",
     "static/media/equipa-joana.jpeg": "/static/media/equipa-joana.341229a170a33c3423c8.jpeg",
     "static/media/equipa-sandra.jpeg": "/static/media/equipa-sandra.f7ccaeaf695bab558129.jpeg",
     "static/media/equipa-nani.jpeg": "/static/media/equipa-nani.9dd71e3469e3a96e2628.jpeg",
     "static/media/equipa-cici.jpeg": "/static/media/equipa-cici.a1fb5f6b549484be9f3b.jpeg",
+    "static/media/hoya.jpg": "/static/media/hoya.e5f0c44dedba587a7a28.jpg",
     "static/media/bib-barcelos.jpg": "/static/media/bib-barcelos.1348650bf0f81ab0ef33.jpg",
+    "static/media/hernani.jpg": "/static/media/hernani.d82103f9607bf77895c1.jpg",
     "static/media/flores-1.png": "/static/media/flores-1.e6247eede24b4d4cb2ca.png",
     "static/media/equipa-andre.jpg": "/static/media/equipa-andre.4eed7844ec32c3a08e8f.jpg",
     "static/media/puzzflor.jpg": "/static/media/puzzflor.3d896b67cef1f8608b19.jpg",
     "static/media/instagram.png": "/static/media/instagram.edb90ecc706a7a25542b.png",
     "static/media/todos-icon.jpg": "/static/media/todos-icon.f5995624cf52aff3648f.jpg",
     "index.html": "/index.html",
-    "main.1243d31e.css.map": "/static/css/main.1243d31e.css.map",
-    "main.d104ebc5.js.map": "/static/js/main.d104ebc5.js.map",
+    "main.d37ee86c.css.map": "/static/css/main.d37ee86c.css.map",
+    "main.d1fba4fe.js.map": "/static/js/main.d1fba4fe.js.map",
     "453.68693753.chunk.js.map": "/static/js/453.68693753.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1243d31e.css",
-    "static/js/main.d104ebc5.js"
+    "static/css/main.d37ee86c.css",
+    "static/js/main.d1fba4fe.js"
   ]
 }
