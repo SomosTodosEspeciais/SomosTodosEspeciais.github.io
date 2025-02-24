@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { Button } from '@mui/material';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import app from '../../Firebase/firebase';
+import {app} from '../../Firebase/firebase';
 
 interface Extra {
     id: string;

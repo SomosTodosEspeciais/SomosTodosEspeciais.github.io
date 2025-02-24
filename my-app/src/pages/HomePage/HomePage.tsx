@@ -11,8 +11,10 @@ import flower3 from '../../assets/flores-3.png';
 import Flower from '../../components/Flower/Flower';
 import { Key, useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-
-
+import Modal from '../../components/Modal/Modal';
+import ModalFollow from '../../components/ModalFollow/ModalFollow';
+import Hoya from '../../assets/hoya.jpg'
+import Hernani from '../../assets/hernani.jpg'
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -31,6 +33,20 @@ interface FlowerPosition {
 const HomePage = () => {
   const isSmallScreen = useMediaQuery('(max-width: 900px)');
   const [flowers, setFlowers] = useState<FlowerPosition[]>([]);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
+  const [isModalOpen2, setIsModalOpen2] = useState(true);
+
+  const closeModal2 = () => {
+    setIsModalOpen2(false);
+  };
 
 
   useEffect(() => {
@@ -114,8 +130,9 @@ const HomePage = () => {
 
   return (
     <div className="HomePage">
-      
+
       <div className="lateral-left"></div>
+
       <div className="content">
         <div style={{ textAlign: "center" }}>
           <h1>Inclusão em Ação: Uma Jornada de Transformação através da Ação Comunitária e Solidariedade</h1>
@@ -316,6 +333,78 @@ const HomePage = () => {
         </div>
       </div>
       <div className="lateral-right"></div>
+
+
+      {isModalOpen2 && (
+
+        <ModalFollow
+          isOpen={isModalOpen2}
+          onClose={closeModal2}
+          titulo={"Hernâni Barber"}
+          onSave={() => {
+            setIsModalOpen2(false);
+          }}
+          showButtons={false}
+          height={'auto'}
+        >
+          <div style={{ width: "100%", display: "flex", justifyContent: "space-between", flexDirection: isSmallScreen ? "column" : "row" }}>
+            <Typography
+              variant="body1"
+              lineHeight="24px"
+              width={isSmallScreen ? "100%" : "60%"}
+              sx={{ whiteSpace: "pre-line" }}
+            >
+              Poderás gostar de ... Hernâni Barber {"\n"}
+              Aceda ao link e usufrui de um resultado como tu, especial.{"\n\n"}
+
+
+
+              <a href="https://www.instagram.com/nanibarber2511/" target="_blank" rel="noopener noreferrer">
+                Instagram
+              </a>
+            </Typography>
+
+
+            <img src={Hernani} alt='' />
+          </div>
+        </ModalFollow>
+      )}
+      {isModalOpen && (
+
+        <ModalFollow
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          titulo={"Hoya"}
+          onSave={() => {
+            setIsModalOpen(false);
+          }}
+          showButtons={false}
+          height={'auto'}
+        >
+          <div style={{ width: "100%", display: "flex", justifyContent: "space-between", flexDirection: isSmallScreen ? "column" : "row" }}>
+            <Typography
+              variant="body1"
+              lineHeight="24px"
+              width={isSmallScreen ? "100%" : "60%"}
+              sx={{ whiteSpace: "pre-line" }}
+            >
+              Poderás gostar de ... Hoya {"\n"}
+              Aceda ao link e descobre esta Lojinha de peças de croché tão especial{"\n\n"}
+
+              <a href="https://www.facebook.com/people/Hoya/61573137994529/" target="_blank" rel="noopener noreferrer">
+                Facebook
+              </a>{" | "}
+
+              <a href="https://www.instagram.com/hoya.crochet/" target="_blank" rel="noopener noreferrer">
+                Instagram
+              </a>
+            </Typography>
+
+
+            <img src={Hoya} alt='' />
+          </div>
+        </ModalFollow>
+      )}
     </div>
   );
 };
